@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PIM | Indospace</title>
+  <title>AdminLTE 3 | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -47,9 +47,9 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{% url 'index' %}" class="nav-link">Home</a>
       </li>
-      {% comment %} <li class="nav-item d-none d-sm-inline-block">
+      <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
-      </li> {% endcomment %}
+      </li>
       <li>
         
       </li>
@@ -189,9 +189,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{% url 'index' %}" class="brand-link">
+    <a href="index3.html" class="brand-link">
       <img src="{% static 'dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">PIM | Indospace</span>
+      <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
 
     <!-- Sidebar -->
@@ -202,12 +202,12 @@
           <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">admin</a>
+          <a href="#" class="d-block">Alexander Pierce</a>
         </div>
       </div>
 
       <!-- SidebarSearch Form -->
-      {% comment %} <div class="form-inline">
+      <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
@@ -216,14 +216,14 @@
             </button>
           </div>
         </div>
-      </div> {% endcomment %}
+      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          {% comment %} <li class="nav-item menu-open">
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -251,8 +251,8 @@
                 </a>
               </li>
             </ul>
-          </li> {% endcomment %}
-          {% comment %} <li class="nav-item">
+          </li>
+          <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -769,23 +769,15 @@
               <i class="nav-icon fas fa-file"></i>
               <p>Documentation</p>
             </a>
-          </li> {% endcomment %}
-          <li class="nav-header">DASHBOARDS</li>
+          </li>
+          <li class="nav-header">MULTI LEVEL EXAMPLE</li>
           <li class="nav-item">
-            <a href="{% url 'index' %}" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
-              <p>Dashboard</p>
+              <p>Level 1</p>
             </a>
           </li>
-          <li class="nav-header">PRODUCTS</li>
           <li class="nav-item">
-            <a href="{% url 'product:product_list' %}" class="nav-link">
-            {% comment %} <a href="#" class="nav-link"> {% endcomment %}
-              <i class="fas fa-circle nav-icon"></i>
-              <p>Product</p>
-            </a>
-          </li>
-          {% comment %} <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
@@ -842,8 +834,8 @@
               <i class="fas fa-circle nav-icon"></i>
               <p>Level 1</p>
             </a>
-          </li> {% endcomment %}
-          {% comment %} <li class="nav-header">LABELS</li>
+          </li>
+          <li class="nav-header">LABELS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>
@@ -861,7 +853,7 @@
               <i class="nav-icon far fa-circle text-info"></i>
               <p>Informational</p>
             </a>
-          </li> {% endcomment %}
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -871,7 +863,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    {% comment %} <!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -887,7 +879,7 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header --> {% endcomment %}
+    <!-- /.content-header -->
 
     <!-- Main content -->
     <section class="content">

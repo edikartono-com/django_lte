@@ -1,0 +1,39 @@
+{% extends "adminlte/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Product List</h1>
+<table>
+  <tr>
+    <th>SKU</th>
+    <th>Name</th>
+    <th>Featured Image</th>
+    <th>Category</th>
+    <th>Brand</th>
+    <th>BOM File</th>
+    <th>Cost Price</th>
+    <th>Created At</th>
+    <th>Updated At</th>
+    <th>Status</th>
+  </tr>
+  {% for product in products %}
+    <tr>
+      <td>{{ product.sku }}</td>
+      <td>{{ product.name }}</td>
+      <td>{% if product.featured_image %}<img src="{{ product.featured_image.url }}" width="50">{% endif %}</td>
+      <td>{{ product.category.all|join:', ' }}</td>
+      <td>{{ product.brand }}</td>
+      <td>{% if product.bom_file %}<a href="{{ product.bom_file.url }}">Download</a>{% endif %}</td>
+      <td>{{ product.cost_price }}</td>
+      <td>{{ product.created_at }}</td>
+      <td>{{ product.updated_at }}</td>
+      <td>{{ product.get_status_display }}</td>
+    </tr>
+  {% endfor %}
+</table>
+{% endblock %}
+
+
+
+
+

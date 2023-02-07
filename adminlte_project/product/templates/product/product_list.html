@@ -1,0 +1,234 @@
+{% extends "adminlte/base.html" %}
+{% load static %}
+{% block body %}
+
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>DataTables</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+              <li class="breadcrumb-item active">DataTables</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                <div class="card-tools">
+                  <a href="{% url 'product:product_create' %}" class="btn btn-success btn-sm">Create New Product</a>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>SKU</th>
+                    <th>Name</th>
+                    <th>Featured Image</th>
+                    <th>Category</th>
+                    <th>Brand</th>
+                    <th>BOM File</th>
+                    <th>Cost Price</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  {% for product in products %}
+                  <tbody>
+                  <tr>
+                    <td>{{ product.sku }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{% if product.featured_image %}<img src="{{ product.featured_image.url }}" width="100"  alt="{{ product.name }}">{% endif %}</td>
+                    <td>{{ product.category.all|join:', ' }}</td>
+                    <td>{{ product.brand }}</td>
+                    <td>{% if product.bom_file %}<a href="{{ product.bom_file.url }}">Download</a>{% endif %}</td>
+                    <td>{{ product.cost_price }}</td>
+                    <td>{{ product.created_at }}</td>
+                    <td>{{ product.updated_at }}</td>
+                    <td>{{ product.get_status_display }}</td>
+                    <td>
+                      <a href="{% url 'product:product_edit' product.id %}" class="btn btn-info btn-sm">Edit</a>
+                      <a href="{% url 'product:product_delete' product.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                      {% comment %} <a href="{% url 'product:product_details' product.id %}" class="btn btn-secondary btn-sm">Details</a> {% endcomment %}
+                  </td>
+                  </tr>
+                  {% endfor %}
+                  
+                  </tbody>
+
+                </table>
+              </div>
+              {% comment %} <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>Rendering engine</th>
+                    <th>Browser</th>
+                    <th>Platform(s)</th>
+                    <th>Engine version</th>
+                    <th>CSS grade</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                      Explorer 4.0
+                    </td>
+                    <td>Win 95+</td>
+                    <td> 4</td>
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                      Explorer 5.0
+                    </td>
+                    <td>Win 95+</td>
+                    <td>5</td>
+                    <td>C</td>
+                  </tr>
+                  
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>Rendering engine</th>
+                    <th>Browser</th>
+                    <th>Platform(s)</th>
+                    <th>Engine version</th>
+                    <th>CSS grade</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div> {% endcomment %}
+            <!-- /.card -->
+
+            {% comment %} <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">DataTable with default features</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Rendering engine</th>
+                    <th>Browser</th>
+                    <th>Platform(s)</th>
+                    <th>Engine version</th>
+                    <th>CSS grade</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                      Explorer 4.0
+                    </td>
+                    <td>Win 95+</td>
+                    <td> 4</td>
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                      Explorer 5.0
+                    </td>
+                    <td>Win 95+</td>
+                    <td>5</td>
+                    <td>C</td>
+                  </tr>
+
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>Rendering engine</th>
+                    <th>Browser</th>
+                    <th>Platform(s)</th>
+                    <th>Engine version</th>
+                    <th>CSS grade</th>
+                  </tr>
+                  </tfoot> {% endcomment %}
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  
+
+  <!-- /.control-sidebar -->
+
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{% static '../../plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static '../../plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{% static '../../plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static '../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static '../../plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static '../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static '../../plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static '../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static '../../plugins/jszip/jszip.min.js' %}"></script>
+<script src="{% static '../../plugins/pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static '../../plugins/pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static '../../plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static '../../plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static '../../plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+
+{% endblock %}
