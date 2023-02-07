@@ -16,22 +16,28 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
-from django.contrib.auth import views as auth_views
-from django.views.generic.base import TemplateView
+# from django.contrib.auth import views as auth_views
+# from django.views.generic.base import TemplateView
 from django.shortcuts import render
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 
-def handler404(request, exception):
-    if request.user.is_authenticated:
-        print('True')
-        return render(request, '404.html')
-    else:
-        print('Fail')
-        return render(request, '1404.html')
+
 
 
 urlpatterns = [
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html', success_url='/'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    # path('accounts/', include('django.contrib.auth.urls')),
+    path('', include('adminlte.urls')),
     path('admin/', admin.site.urls),
-    # path('', include('adminlte.urls')),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+# def handler404(request, exception):
+#     if request.user.is_authenticated:
+#         print('True')
+#         return render(request, 'pages/404.html')
+#     else:
+#         print('Fail')
+#         return render(request, 'pages/500.html')
