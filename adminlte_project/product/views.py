@@ -46,6 +46,7 @@ def product_create(request):
                 return render(request, 'product/product_create.html', {'form': form})
         else:
             # form = ProductForm()
+            messages.error(request, 'Failed to create product!')
             return render(request, 'product/product_create.html', {'form': form})
     if request.method == 'GET':
         form = ProductForm()
@@ -61,14 +62,14 @@ def product_edit(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Product was updated successfully!')
-            return redirect('product_list')
-    return render(request, 'product_edit.html', {'form': form, 'id': id})
+            return redirect('/product/product-list')
+    return render(request, 'product/product_edit.html', {'form': form, 'id': id})
 
 @login_required
 def product_delete(request, id):
     Product.objects.filter(id=id).delete()
     messages.warning(request, 'Product was deleted successfully!')
-    return redirect('/product-list')
+    return redirect('product:product_list')
 
 @login_required
 def product_details(request, id):

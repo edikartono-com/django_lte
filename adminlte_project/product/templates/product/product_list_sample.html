@@ -3,7 +3,10 @@
 
 {% block content %}
 <h1>Product List</h1>
-<table>
+
+<div class="card-body">
+<table id="example1" class="table table-bordered table-striped">
+  <thead>
   <tr>
     <th>SKU</th>
     <th>Name</th>
@@ -16,6 +19,8 @@
     <th>Updated At</th>
     <th>Status</th>
   </tr>
+</thead>
+<tbody>
   {% for product in products %}
     <tr>
       <td>{{ product.sku }}</td>
@@ -30,7 +35,9 @@
       <td>{{ product.get_status_display }}</td>
     </tr>
   {% endfor %}
+  <tbody>
 </table>
+</div>
 {% endblock %}
 
 

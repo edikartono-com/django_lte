@@ -15,7 +15,7 @@ urlpatterns = [
     path('product-create', (views.product_create), name='product_create'),
     path('product-edit/<int:id>/', (views.product_edit), name='product_edit'),
     path('product-delete/<int:id>', (views.product_delete), name='product_delete'),
-    ]
+    ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
