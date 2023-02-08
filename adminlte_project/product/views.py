@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product, Brand, Category
 import datetime
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
@@ -24,24 +24,29 @@ def product_create(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            product = form.save(commit=False)
-            category_list = request.POST.getlist('category')
-            if category_list:
-                # product.save()
-                product.category.set(category_list)
-            brand = request.POST.get('brand')
-            if brand:
-                product.brand = Brand.objects.get(id=brand)
-            cost_price = request.POST.get('cost_price')
-            if cost_price:
-                product.cost_price = cost_price
-            product.save()
-            form.save_m2m()
-            messages.success(request, 'Product was created successfully!')
-            return redirect('/product/product-list')
+            try:
+                product = form.save(commit=False)
+                category_list = request.POST.getlist('category')
+                brand = request.POST.get('brand')
+                if brand:
+                    product.brand, created = Brand.objects.get_or_create(id=brand)
+                cost_price = request.POST.get('cost_price')
+                if cost_price:
+                    product.cost_price = cost_price
+                product.save()
+                if category_list:   
+                    product.category.set(category_list)
+                else:
+                    product.category.clear()
+                form.save_m2m()
+                messages.success(request, 'Product was created successfully!')
+                return redirect('/product/product-list')
+            except Exception as e:
+                messages.error(request, str(e))
+                return render(request, 'product/product_create.html', {'form': form})
         else:
-            form = ProductForm()
-            # return render(request, 'product/product_create.html', {'form': form})
+            # form = ProductForm()
+            return render(request, 'product/product_create.html', {'form': form})
     if request.method == 'GET':
         form = ProductForm()
         return render(request, 'product/product_create.html', {'form': form})
