@@ -3,7 +3,7 @@
 {% comment %} {% block datatables %} {% endcomment %}
 {% block body %}
 
-{% if messages %}
+{% comment %} {% if messages %}
   {% for message in messages %}
     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
       {{ message }}
@@ -17,7 +17,7 @@
       $('.alert').delay(300).fadeOut();
     });
   </script>
-{% endif %}
+{% endif %} {% endcomment %}
 
 {% comment %} {% if messages %}
 
@@ -39,21 +39,6 @@
     </script>
   {% endif %}
 {% endfor %} {% endcomment %}
-<button type="button" class="btn btn-success toastsDefaultSuccess">
-  Launch Success Toast
-  </button>
-  <button type="button" class="btn btn-info toastsDefaultInfo">
-  Launch Info Toast
-  </button>
-  <button type="button" class="btn btn-warning toastsDefaultWarning">
-  Launch Warning Toast
-  </button>
-  <button type="button" class="btn btn-danger toastsDefaultDanger">
-  Launch Danger Toast
-  </button>
-  <button type="button" class="btn btn-default bg-maroon toastsDefaultMaroon">
-  Launch Maroon Toast
-  </button>
 
   <script>
     $(document).ready(function(){
@@ -75,10 +60,8 @@
       {% endif %}
     });
   </script>
-  
-
   <!-- Content Wrapper. Contains page content -->
-  
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">

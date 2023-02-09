@@ -40,7 +40,8 @@ def product_create(request):
                     product.category.clear()
                 form.save_m2m()
                 messages.success(request, 'Product was created successfully!')
-                return redirect('/product/product-list')
+                # return redirect('/product/product-list')
+                return render(request, 'product/product_create.html', {'form': form})
             except Exception as e:
                 messages.error(request, str(e))
                 return render(request, 'product/product_create.html', {'form': form})
