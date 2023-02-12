@@ -19,15 +19,15 @@
       <td>{{ ambienceimage.product.name }}</td>
       <td><img src="{{ ambienceimage.image.url }}" width="100"></td>
       <td>
-        <a href="{% url 'ambienceimage_edit' ambienceimage.id %}" class="btn btn-primary">Edit</a>
-        <a href="{% url 'ambienceimage_delete' ambienceimage.id %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'product:ambienceimage_edit' ambienceimage.id %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'product:ambienceimage_delete' ambienceimage.id %}" class="btn btn-danger">Delete</a>
       </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 
-<a href="{% url 'ambienceimage_create' %}" class="btn btn-success">Create Ambience Image</a>
+<a href="{% url 'product:ambienceimage_create' %}" class="btn btn-success">Create Ambience Image</a>
 
 {% endblock %}
 

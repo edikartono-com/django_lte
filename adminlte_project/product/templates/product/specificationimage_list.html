@@ -1,0 +1,34 @@
+{% extends "adminlte/base.html" %}
+{% load static %}
+{% block body %}
+
+{% block content %}
+
+<h1>Specification Images</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Image</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for specificationimage in specificationimages %}
+    <tr>
+      <td>{{ specificationimage.product.name }}</td>
+      <td><img src="{{ specificationimage.image.url }}" width="100"></td>
+      <td>
+        <a href="{% url 'product:specificationimage_edit' specificationimage.id %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'product:specificationimage_delete' specificationimage.id %}" class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="{% url 'product:specificationimage_create' %}" class="btn btn-success">Create specification Image</a>
+
+{% endblock %}
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Brand, Category, AmbienceImage
+from .models import Product, Brand, Category, AmbienceImage, SpecificationImage, TechnicalImage
 import datetime
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .forms import ProductForm, CategoryForm, BrandForm, AmbienceImageForm
+from .forms import ProductForm, CategoryForm, BrandForm, AmbienceImageForm, SpecificationImageForm, TechnicalImageForm
 from django.urls import reverse
 
 # @login_required
@@ -183,17 +183,17 @@ def brand_delete(request, id):
 # ==========================---AMBIENCE IMAGE---=====================
 def ambienceimage_list(request):
     ambienceimages = AmbienceImage.objects.all()
-    return render(request, 'ambienceimage/ambienceimage_list.html', {'ambienceimages': ambienceimages})
+    return render(request, 'product/ambienceimage_list.html', {'ambienceimages': ambienceimages})
 
 def ambienceimage_create(request):
     if request.method == 'POST':
         form = AmbienceImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('ambienceimage_list')
+            return redirect('product:ambienceimage_list')
     else:
         form = AmbienceImageForm()
-    return render(request, 'ambienceimage/ambienceimage_create.html', {'form': form})
+    return render(request, 'product/ambienceimage_create.html', {'form': form})
 
 def ambienceimage_edit(request, id):
     ambienceimage = get_object_or_404(AmbienceImage, id=id)
@@ -201,12 +201,75 @@ def ambienceimage_edit(request, id):
         form = AmbienceImageForm(request.POST, request.FILES, instance=ambienceimage)
         if form.is_valid():
             form.save()
-            return redirect('ambienceimage_list')
+            return redirect('product:ambienceimage_list')
     else:
         form = AmbienceImageForm(instance=ambienceimage)
-    return render(request, 'ambienceimage/ambienceimage_edit.html', {'form': form})
+    return render(request, 'product/ambienceimage_edit.html', {'form': form})
 
 def ambienceimage_delete(request, id):
     ambienceimage = get_object_or_404(AmbienceImage, id=id)
     ambienceimage.delete()
-    return redirect('ambienceimage_list')
+    return redirect('product:ambienceimage_list')
+
+# ==========================---SPECIFICATION IMAGE---=====================
+def specificationimage_list(request):
+    specificationimages = SpecificationImage.objects.all()
+    return render(request, 'product/specificationimage_list.html', {'specificationimages': specificationimages})
+
+def specificationimage_create(request):
+    if request.method == 'POST':
+        form = SpecificationImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('product:specificationimage_list')
+    else:
+        form = SpecificationImageForm()
+    return render(request, 'product/specificationimage_create.html', {'form': form})
+
+def specificationimage_edit(request, id):
+    specificationimage = get_object_or_404(SpecificationImage, id=id)
+    if request.method == 'POST':
+        form = SpecificationImageForm(request.POST, request.FILES, instance=specificationimage)
+        if form.is_valid():
+            form.save()
+            return redirect('product:specificationimage_list')
+    else:
+        form = SpecificationImageForm(instance=specificationimage)
+    return render(request, 'product/specificationimage_edit.html', {'form': form})
+
+def specificationimage_delete(request, id):
+    specificationimage = get_object_or_404(SpecificationImage, id=id)
+    specificationimage.delete()
+    return redirect('product:specificationimage_list')
+
+
+# ==========================---TECHNICAL IMAGE---=====================
+def technicalimage_list(request):
+    technicalimages = TechnicalImage.objects.all()
+    return render(request, 'product/technicalimage_list.html', {'technicalimages': technicalimages})
+
+def technicalimage_create(request):
+    if request.method == 'POST':
+        form = TechnicalImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('product:technicalimage_list')
+    else:
+        form = TechnicalImageForm()
+    return render(request, 'product/technicalimage_create.html', {'form': form})
+
+def technicalimage_edit(request, id):
+    technicalimage = get_object_or_404(TechnicalImage, id=id)
+    if request.method == 'POST':
+        form = TechnicalImageForm(request.POST, request.FILES, instance=technicalimage)
+        if form.is_valid():
+            form.save()
+            return redirect('product:technicalimage_list')
+    else:
+        form = TechnicalImageForm(instance=technicalimage)
+    return render(request, 'product/technicalimage_edit.html', {'form': form})
+
+def technicalimage_delete(request, id):
+    technicalimage = get_object_or_404(TechnicalImage, id=id)
+    technicalimage.delete()
+    return redirect('product:technicalimage_list')

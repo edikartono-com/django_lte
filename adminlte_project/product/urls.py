@@ -22,11 +22,20 @@ urlpatterns = [
     path('brand-list/', views.brand_list, name='brand_list'),
     path('brand-create/', views.brand_create, name='brand_create'),
     path('brand-edit/<int:id>/', views.brand_edit, name='brand_edit'),
-    path('brand-delete/<int:id>', views.brand_delete, name='brand_delete')
+    path('brand-delete/<int:id>', views.brand_delete, name='brand_delete'),
     path('ambienceimage-list/', views.ambienceimage_list, name='ambienceimage_list'),
     path('ambienceimage-create/', views.ambienceimage_create, name='ambienceimage_create'),
     path('ambienceimage-edit/<int:id>/', views.ambienceimage_edit, name='ambienceimage_edit'),
-    path('ambienceimage-delete/<int:id>', views.ambienceimage_delete, name='ambienceimage_delete')
+    path('ambienceimage-delete/<int:id>', views.ambienceimage_delete, name='ambienceimage_delete'),
+    path('specificationimage-list/', views.specificationimage_list, name='specificationimage_list'),
+    path('specificationimage-create/', views.specificationimage_create, name='specificationimage_create'),
+    path('specificationimage-edit/<int:id>/', views.specificationimage_edit, name='specificationimage_edit'),
+    path('specificationimage-delete/<int:id>', views.specificationimage_delete, name='specificationimage_delete'),
+    path('technicalimage-list/', views.technicalimage_list, name='technicalimage_list'),
+    path('technicalimage-create/', views.technicalimage_create, name='technicalimage_create'),
+    path('technicalimage-edit/<int:id>/', views.technicalimage_edit, name='technicalimage_edit'),
+    path('technicalimage-delete/<int:id>', views.technicalimage_delete, name='technicalimage_delete')
+
     ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

@@ -1,0 +1,16 @@
+{% extends "adminlte/base.html" %}
+{% load static %}
+{% block body %}
+
+{% block content %}
+
+<h1>Create Technical Image</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save</button>
+</form>
+
+{% endblock %}
+
+{% endblock %}

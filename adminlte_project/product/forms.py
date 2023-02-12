@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product, Category, Brand, AmbienceImage
+from .models import Product, Category, Brand, AmbienceImage, SpecificationImage, TechnicalImage
 from django.core.exceptions import ValidationError
 
 class ProductForm(forms.ModelForm):
@@ -34,4 +34,14 @@ class BrandForm(forms.ModelForm):
 class AmbienceImageForm(forms.ModelForm):
     class Meta:
         model = AmbienceImage
+        fields = ['product', 'image']
+
+class SpecificationImageForm(forms.ModelForm):
+    class Meta:
+        model = SpecificationImage
+        fields = ['product', 'image']
+
+class TechnicalImageForm(forms.ModelForm):
+    class Meta:
+        model = TechnicalImage
         fields = ['product', 'image']

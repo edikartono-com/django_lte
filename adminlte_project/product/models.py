@@ -40,3 +40,11 @@ class Product(models.Model):
 class AmbienceImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ambience_image')
     image = models.ImageField(upload_to = 'ambience_image', null=True)
+
+class SpecificationImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='spec_image')
+    image = models.ImageField(upload_to = 'specification_image', null=True)
+
+class TechnicalImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='technical_image')
+    image = models.ImageField(upload_to = 'technical_image', null=True)
