@@ -13,9 +13,13 @@ class ProductForm(forms.ModelForm):
 
     def clean_sku(self):
         sku = self.cleaned_data['sku']
+        instance = getattr(self, 'instance', None)
+        if instance and instance.sku == sku:
+            return sku
         if Product.objects.filter(sku=sku).exists():
             raise ValidationError("A product with this SKU already exists.")
         return sku
+        
 
 class CategoryForm(forms.ModelForm):
     class Meta:

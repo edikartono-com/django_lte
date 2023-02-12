@@ -1,0 +1,25 @@
+{% extends "adminlte/base.html" %}
+{% load static %}
+{% block body %}
+
+{% block content %}
+
+<h1>Brand List</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+  {% for brand in brands %}
+  <tr>
+    <td>{{ brand.name }}</td>
+    <td><a href="{% url 'product:brand_edit' brand.pk %}">Edit</a></td>
+    <td><a href="{% url 'product:brand_delete' brand.pk %}" onclick="return confirm('Are you sure?');">Delete</a></td>
+  </tr>
+  {% endfor %}
+</table>
+<a href="{% url 'product:brand_create' %}">Create</a>
+
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends "adminlte/base.html" %}
+{% load static %}
+{% block body %}
+
+<h1>Create Product</h1>
+{% comment %} {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endfor %}
+{% endif %} {% endcomment %}
+
+{% if form.errors %}
+  <div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    {% for error in form.errors %}
+      {{ error }}
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% for field in form %}
+  {% for error in field.errors %}
+    <div class="form-group has-error">
+      {{ field }}
+      <span class="help-block">{{ error }}</span>
+    </div>
+  {% endfor %}
+{% endfor %}
+
+<div class="col-md-6">
+  <div class="card card-secondary">
+  <div class="card-header">
+  <h3 class="card-title">Product Details</h3>
+  <div class="card-tools">
+  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+  <i class="fas fa-minus"></i>
+  </button>
+  </div>
+  </div>
+  <div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="inputSKU">SKU</label>
+        <input type="text" id="inputSKU" class="form-control" name="sku" value="{{ form.sku.value }}" required>
+      </div>
+      <div class="form-group">
+        <label for="inputName">Name</label>
+        <input type="text" id="inputName" class="form-control" name="name" value="{{ form.name.value }}" required>
+      </div>
+      <div class="form-group">
+        <label>Featured Image</label>
+        <input type="file" class="form-control" name="featured_image" multiple />
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <select class="form-control select2" multiple="multiple" name="category">
+            {% for category in form.category.field.queryset %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Brand</label>
+        <select class="form-control" name="brand">
+            <option value="">Select Brand</option>
+            {% for brand in form.brand.field.queryset %}
+            <option value="{{ brand.id }}">{{ brand.name }}</option>
+            {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <div class="form-group">
+          <label>BOM File</label>
+          <input type="file" class="form-control" name="bom_file" />
+      </div>
+      </div>
+      <div class="form-group">
+        <label>Cost Price</label>
+        <input type="text" class="form-control" name="cost_price" />
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select class="form-control" name="status">
+            <option value="">Select Status</option>
+            {% for key, value in form.status.field.choices %}
+            <option value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Save Changes" class="btn btn-primary">
+        <a href="{% url 'product:product_list' %}" class="btn btn-secondary">Back to List</a>
+      </div>
+      {% for field in form %}
+        {% for error in field.errors %}
+          <p style="color:red;">{{ error }}</p>
+        {% endfor %}
+      {% endfor %}
+    </form>
+    <div class="col-md-6">
+      <div class="form-group">
+      <label>Multiple</label>
+      <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+      <option>Alabama</option>
+      <option>Alaska</option>
+      <option>California</option>
+      <option>Delaware</option>
+      <option>Tennessee</option>
+      <option>Texas</option>
+      <option>Washington</option>
+      </select>
+      </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  
+
+{% endblock %}
