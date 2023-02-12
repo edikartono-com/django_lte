@@ -10,11 +10,17 @@ from django.http import HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import ProductForm, CategoryForm, BrandForm, AmbienceImageForm, SpecificationImageForm, TechnicalImageForm
+from django.forms import inlineformset_factory
 from django.urls import reverse
 
 # @login_required
 # def index(request):
 #     return render(request, 'index.html')
+
+AmbienceImageFormSet = inlineformset_factory(Product, AmbienceImage, form=AmbienceImageForm, extra=1)
+SpecificationImageFormSet = inlineformset_factory(Product, SpecificationImage, form=SpecificationImageForm, extra=1)
+TechnicalImageFormSet = inlineformset_factory(Product, TechnicalImage, form=TechnicalImageForm, extra=1)
+
 @login_required
 def product_list(request):
     products = Product.objects.all()
@@ -22,9 +28,22 @@ def product_list(request):
 
 @login_required
 def product_create(request):
+    form = ProductForm()
+    ambience_formset = AmbienceImageFormSet(prefix='ambience')
+    specification_formset = SpecificationImageFormSet(prefix='specification')
+    technical_formset = TechnicalImageFormSet(prefix='technical')
+    context = {
+        'form': form,
+        'ambience_formset': ambience_formset,
+        'specification_formset': specification_formset,
+        'technical_formset': technical_formset,
+        }
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
+        ambience_formset = AmbienceImageFormSet(request.POST, request.FILES, prefix='ambience')
+        specification_formset = SpecificationImageFormSet(request.POST, request.FILES, prefix='specification')
+        technical_formset = TechnicalImageFormSet(request.POST, request.FILES, prefix='technical')
+        if form.is_valid() and ambience_formset.is_valid() and specification_formset.is_valid() and technical_formset.is_valid():
             try:
                 product = form.save(commit=False)
                 category_list = request.POST.getlist('category')
@@ -40,28 +59,47 @@ def product_create(request):
                 else:
                     product.category.clear()
                 form.save_m2m()
+                ambience_formset.instance = product
+                ambience_formset.save()
+                specification_formset.instance = product
+                specification_formset.save()
+                technical_formset.instance = product
+                technical_formset.save()
                 messages.success(request, 'Product was created successfully!')
                 return redirect(reverse('product:product_list'))
                 # return redirect('/product/product-list')
                 # return render(request, 'product/product_edit.html', {'form': form})
             except Exception as e:
                 messages.error(request, str(e))
-                return render(request, 'product/product_create.html', {'form': form})
+                return render(request, 'product/product_create.html', context)
         else:
             # form = ProductForm()
             messages.error(request, 'Failed to create product!')
-            return render(request, 'product/product_create.html', {'form': form})
+            return render(request, 'product/product_create.html', context)
     if request.method == 'GET':
         form = ProductForm()
-        return render(request, 'product/product_create.html', {'form': form})
+        return render(request, 'product/product_create.html', context)
     
-
 @login_required
 def product_edit(request, id):
     product = get_object_or_404(Product, id=id)
+    form = ProductForm(instance=product)
+    ambience_formset = AmbienceImageFormSet(instance=product, prefix='ambience')
+    specification_formset = SpecificationImageFormSet(instance=product, prefix='specification')
+    technical_formset = TechnicalImageFormSet(instance=product, prefix='technical')
+    context = {
+        'form': form,
+        'ambience_formset': ambience_formset,
+        'specification_formset': specification_formset,
+        'technical_formset': technical_formset,
+        'id': id
+        }
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
-        if form.is_valid():
+        ambience_formset = AmbienceImageFormSet(request.POST, request.FILES, instance=product, prefix='ambience')
+        specification_formset = SpecificationImageFormSet(request.POST, request.FILES, instance=product, prefix='specification')
+        technical_formset = TechnicalImageFormSet(request.POST, request.FILES, instance=product, prefix='technical')
+        if form.is_valid() and ambience_formset.is_valid() and specification_formset.is_valid() and technical_formset.is_valid():
             try:
                 product = form.save(commit=False)
                 category_list = request.POST.getlist('category')
@@ -77,17 +115,58 @@ def product_edit(request, id):
                 else:
                     product.category.clear()
                 form.save_m2m()
+                ambience_formset.instance = product
+                ambience_formset.save()
+                specification_formset.instance = product
+                specification_formset.save()
+                technical_formset.instance = product
+                technical_formset.save()
                 messages.success(request, 'Product was updated successfully!')
                 return redirect(reverse('product:product_edit', args=[product.id]))
             except Exception as e:
                 messages.error(request, str(e))
-                return render(request, 'product/product_edit.html', {'form': form, 'id': id})
+                return render(request, 'product/product_edit.html', context)
         else:
             messages.error(request, 'Failed to update product!')
-            return render(request, 'product/product_edit.html', {'form': form, 'id': id})
+            return render(request, 'product/product_edit.html', context)
     if request.method == 'GET':
         form = ProductForm(instance=product)
-        return render(request, 'product/product_edit.html', {'form': form, 'id': id})
+        return render(request, 'product/product_edit.html', context)
+
+
+
+# @login_required
+# def product_edit(request, id):
+#     product = get_object_or_404(Product, id=id)
+#     if request.method == 'POST':
+#         form = ProductForm(request.POST, request.FILES, instance=product)
+#         if form.is_valid():
+#             try:
+#                 product = form.save(commit=False)
+#                 category_list = request.POST.getlist('category')
+#                 brand = request.POST.get('brand')                
+#                 if brand:
+#                     product.brand, created = Brand.objects.get_or_create(id=brand)
+#                 cost_price = request.POST.get('cost_price')
+#                 if cost_price:
+#                     product.cost_price = cost_price
+#                 product.save()
+#                 if category_list:   
+#                     product.category.set(category_list)
+#                 else:
+#                     product.category.clear()
+#                 form.save_m2m()
+#                 messages.success(request, 'Product was updated successfully!')
+#                 return redirect(reverse('product:product_edit', args=[product.id]))
+#             except Exception as e:
+#                 messages.error(request, str(e))
+#                 return render(request, 'product/product_edit.html', {'form': form, 'id': id})
+#         else:
+#             messages.error(request, 'Failed to update product!')
+#             return render(request, 'product/product_edit.html', {'form': form, 'id': id})
+#     if request.method == 'GET':
+#         form = ProductForm(instance=product)
+#         return render(request, 'product/product_edit.html', {'form': form, 'id': id})
 
 
 

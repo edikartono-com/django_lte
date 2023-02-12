@@ -14,6 +14,9 @@
         {% endfor %}
       </div>
     {% endfor %}
+    {{ ambience_formset.as_table }}
+    {{ specification_formset.as_table }}
+    {{ technical_formset.as_table }}
     <input type="submit" value="Submit">
   </form>
 
