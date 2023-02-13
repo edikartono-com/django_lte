@@ -37,6 +37,16 @@ class Product(models.Model):
                                 choices=Status.choices,
                                 default=Status.ENABLE)
 
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+        models.Index(fields=['-created_at']),
+        ]
+        # unique_together = ('sku',)
+
+    def __str__(self):
+        return self.name or ''
+
 class AmbienceImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ambience_image')
     image = models.ImageField(upload_to = 'ambience_image', null=True)

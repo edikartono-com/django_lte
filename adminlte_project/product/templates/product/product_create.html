@@ -1,22 +1,3637 @@
-{% extends "adminlte/base.html" %}
-{% load static %}
-{% block body %}
+{% extends "adminlte/base.html" %} {% load static %} {% block body %}
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% for field in form %}
-      <div class="form-group">
-        {{ field.label_tag }}
-        {{ field }}
-        {% for error in field.errors %}
-          <p class="text-danger">{{ error }}</p>
-        {% endfor %}
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <p class="lead">Products / Vento-01-AL</p>
+        <h3>Vento Single Seater</h3>
+        <div class="d-flex">
+          <p class="text-dark mr-4">
+            Overall Completness : <span class="text-success">> 50%</span>
+          </p>
+          <div class="form-group">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="customSwitch1"
+              />
+              <label class="custom-control-label" for="customSwitch1"
+                >Draft</label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="progress">
+          <div
+            class="progress-bar bg-primary progress-bar-striped"
+            role="progressbar"
+            aria-valuenow="50"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            style="width: 50%"
+          >
+            <span class="sr-only">50% Complete (success)</span>
+          </div>
+        </div>
+        <div class="col"></div>
+        <div class="col">
+          {% comment %}
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <h5 class="card-title">Column 2</h5>
+                  <p class="card-text">Some text in column 2</p>
+                </div>
+                <div class="col text-center">
+                  <input
+                    type="text"
+                    class="knob"
+                    value="40"
+                    data-skin="tron"
+                    data-thickness="0.2"
+                    data-width="90"
+                    data-height="90"
+                    data-fgColor="red"
+                    data-readonly="true"
+                  />
+                  <div class="knob-label">Completness</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endcomment %}
+        </div>
       </div>
-    {% endfor %}
-    {{ ambience_formset.as_table }}
-    {{ specification_formset.as_table }}
-    {{ technical_formset.as_table }}
-    <input type="submit" value="Submit">
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="container-fluid">
+      <section id="content" class="content">
+        <div class="row">
+          <div id="content-main" class="col-12">
+            <form
+              enctype="multipart/form-data"
+              action=""
+              method="post"
+              id="product_form"
+              novalidate=""
+            >
+              <input
+                type="hidden"
+                name="csrfmiddlewaretoken"
+                value="7Uskac8jyVuqBoTFbChypsCBl7hOhxTgF4rOMLaDK8xxNztO1lPazIWyCGMBPOrq"
+              />
+              <div class="row">
+                <div class="col-12 col-lg-9">
+                  <div class="card">
+                    <div class="card-body">
+                      <ul
+                        class="nav nav-tabs mb-3"
+                        role="tablist"
+                        id="jazzy-tabs"
+                      >
+                      <li class="nav-item">
+                        <a
+                          class="nav-link active"
+                          data-toggle="pill"
+                          role="tab"
+                          aria-controls="general-information-tab"
+                          aria-selected="true"
+                          href="#general-information-tab"
+                        >
+                          Product
+                        </a>
+                      </li>
+                        <li class="nav-item">
+                          <a
+                            class="nav-link active"
+                            data-toggle="pill"
+                            role="tab"
+                            aria-controls="general-information-tab"
+                            aria-selected="true"
+                            href="#general-information-tab"
+                          >
+                            General Information
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            class="nav-link"
+                            data-toggle="pill"
+                            role="tab"
+                            aria-controls="product-specification-tab"
+                            aria-selected="false"
+                            href="#product-specification-tab"
+                          >
+                            Product Specification
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            class="nav-link"
+                            data-toggle="pill"
+                            role="tab"
+                            aria-controls="shipping-details-tab"
+                            aria-selected="false"
+                            href="#shipping-details-tab"
+                          >
+                            Shipping Details
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            class="nav-link"
+                            data-toggle="pill"
+                            role="tab"
+                            aria-controls="factory-drawing-tab"
+                            aria-selected="false"
+                            href="#factory-drawing-tab"
+                          >
+                            Factory Drawing
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            class="nav-link"
+                            data-toggle="pill"
+                            role="tab"
+                            aria-controls="dezign-studio-tab"
+                            aria-selected="false"
+                            href="#dezign-studio-tab"
+                          >
+                            Dezign Studio
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            class="nav-link"
+                            data-toggle="pill"
+                            role="tab"
+                            aria-controls="seo-tab"
+                            aria-selected="false"
+                            href="#seo-tab"
+                          >
+                            SEO
+                          </a>
+                        </li>
+                        {% comment %} <li class="nav-item">
+                          <a
+                            class="nav-link"
+                            data-toggle="pill"
+                            role="tab"
+                            aria-controls="ambience-images-tab"
+                            aria-selected="false"
+                            href="#ambience-images-tab"
+                          >
+                            Ambience images
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            class="nav-link"
+                            data-toggle="pill"
+                            role="tab"
+                            aria-controls="specification-images-tab"
+                            aria-selected="false"
+                            href="#specification-images-tab"
+                          >
+                            Specification images
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            class="nav-link"
+                            data-toggle="pill"
+                            role="tab"
+                            aria-controls="technical-images-tab"
+                            aria-selected="false"
+                            href="#technical-images-tab"
+                          >
+                            Technical images
+                          </a>
+                        </li> {% endcomment %}
+                      </ul>
+
+                      <div class="tab-content">
+                        <div
+                          id="general-information-tab"
+                          class="tab-pane fade active show"
+                          role="tabpanel"
+                          aria-labelledby="general-information-tab"
+                        >
+                          <div class="card">
+                            <div class="p-5 card-body">
+                              <div class="form-group field-id">
+                                <div class="row">
+                                  <label class="col-sm-3 text-left" for="id_id">
+                                    ID
+                                  </label>
+                                  <div class="col-sm-7 field-id">
+                                    <div class="readonly">-</div>
+                                    <div class="help-block red"></div>
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-prefix_code">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_prefix_code"
+                                    >Prefix code</label
+                                  >
+                                  <div class="col-sm-7 field-prefix_code">
+                                    <select
+                                      name="prefix_code"
+                                      id="id_prefix_code"
+                                      data-select2-id="select2-data-id_prefix_code"
+                                      tabindex="-1"
+                                      class="select2-hidden-accessible"
+                                      aria-hidden="true"
+                                    >
+                                      <option value="">---------</option>
+                                      <option value="LC">Lounge Chair</option>
+                                      <option value="LS">Love Seat</option>
+                                      <option
+                                        value="NO"
+                                        selected=""
+                                        data-select2-id="select2-data-2-3h7r"
+                                      >
+                                        None
+                                      </option></select
+                                    ><span
+                                      class="select2 select2-container select2-container--default"
+                                      dir="ltr"
+                                      data-select2-id="select2-data-1-hquy"
+                                      style="width: 135px"
+                                      ><span class="selection"
+                                        ><span
+                                          class="select2-selection select2-selection--single"
+                                          role="combobox"
+                                          aria-haspopup="true"
+                                          aria-expanded="false"
+                                          tabindex="0"
+                                          aria-disabled="false"
+                                          aria-labelledby="select2-id_prefix_code-container"
+                                          aria-controls="select2-id_prefix_code-container"
+                                          ><span
+                                            class="select2-selection__rendered"
+                                            id="select2-id_prefix_code-container"
+                                            role="textbox"
+                                            aria-readonly="true"
+                                            title="None"
+                                            >None</span
+                                          ><span
+                                            class="select2-selection__arrow"
+                                            role="presentation"
+                                            ><b
+                                              role="presentation"
+                                            ></b></span></span></span
+                                      ><span
+                                        class="dropdown-wrapper"
+                                        aria-hidden="true"
+                                      ></span
+                                    ></span>
+                                    <div class="help-block red"></div>
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-pim_code">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_pim_code"
+                                  >
+                                    Pim code
+                                  </label>
+                                  <div class="col-sm-7 field-pim_code">
+                                    <div class="readonly">NO-0None</div>
+                                    <div class="help-block red"></div>
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-sku">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_sku"
+                                  >
+                                    Sku
+
+                                    <span class="text-red">* </span>
+                                  </label>
+                                  <div class="col-sm-7 field-sku">
+                                    <input
+                                      type="text"
+                                      name="sku"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      required=""
+                                      id="id_sku"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-name">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_name"
+                                  >
+                                    Name
+
+                                    <span class="text-red">* </span>
+                                  </label>
+                                  <div class="col-sm-7 field-name">
+                                    <input
+                                      type="text"
+                                      name="name"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      required=""
+                                      id="id_name"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-brand">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_brand"
+                                  >
+                                    Brand
+                                  </label>
+                                  <div class="col-sm-7 field-brand">
+                                    <div
+                                      class="related-widget-wrapper"
+                                      data-model-ref="brand"
+                                    >
+                                      <select
+                                        name="brand"
+                                        id="id_brand"
+                                        data-select2-id="select2-data-id_brand"
+                                        tabindex="-1"
+                                        class="select2-hidden-accessible"
+                                        aria-hidden="true"
+                                      >
+                                        <option
+                                          value=""
+                                          selected=""
+                                          data-select2-id="select2-data-4-n8di"
+                                        >
+                                          ---------
+                                        </option>
+
+                                        <option value="2">Kuno</option>
+
+                                        <option value="3">Triconville</option>
+
+                                        <option value="1">Pure</option>
+
+                                        <option value="4">
+                                          Dezign District
+                                        </option></select
+                                      ><span
+                                        class="select2 select2-container select2-container--default"
+                                        dir="ltr"
+                                        data-select2-id="select2-data-3-a45t"
+                                        style="width: 143px"
+                                        ><span class="selection"
+                                          ><span
+                                            class="select2-selection select2-selection--single"
+                                            role="combobox"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                            tabindex="0"
+                                            aria-disabled="false"
+                                            aria-labelledby="select2-id_brand-container"
+                                            aria-controls="select2-id_brand-container"
+                                            ><span
+                                              class="select2-selection__rendered"
+                                              id="select2-id_brand-container"
+                                              role="textbox"
+                                              aria-readonly="true"
+                                              title="---------"
+                                              >---------</span
+                                            ><span
+                                              class="select2-selection__arrow"
+                                              role="presentation"
+                                              ><b
+                                                role="presentation"
+                                              ></b></span></span></span
+                                        ><span
+                                          class="dropdown-wrapper"
+                                          aria-hidden="true"
+                                        ></span
+                                      ></span>
+
+                                      <a
+                                        class="related-widget-wrapper-link change-related"
+                                        id="change_id_brand"
+                                        data-href-template="/admin/product/brand/__fk__/change/?_to_field=id&amp;_popup=1"
+                                        data-popup="yes"
+                                        title="Change selected brand"
+                                        ><img
+                                          src="/static/admin/img/icon-changelink.svg"
+                                          alt="Change" /></a
+                                      ><a
+                                        class="related-widget-wrapper-link add-related"
+                                        id="add_id_brand"
+                                        data-popup="yes"
+                                        href="/admin/product/brand/add/?_to_field=id&amp;_popup=1"
+                                        title="Add another brand"
+                                        ><img
+                                          src="/static/admin/img/icon-addlink.svg"
+                                          alt="Add" /></a
+                                      ><a
+                                        class="related-widget-wrapper-link view-related"
+                                        id="view_id_brand"
+                                        data-href-template="/admin/product/brand/__fk__/change/?_to_field=id"
+                                        title="View selected brand"
+                                        ><img
+                                          src="/static/admin/img/icon-viewlink.svg"
+                                          alt="View"
+                                      /></a>
+                                    </div>
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-status">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_status"
+                                  >
+                                    Status
+
+                                    <span class="text-red">* </span>
+                                  </label>
+                                  <div class="col-sm-7 field-status">
+                                    <select
+                                      name="status"
+                                      id="id_status"
+                                      data-select2-id="select2-data-id_status"
+                                      tabindex="-1"
+                                      class="select2-hidden-accessible"
+                                      aria-hidden="true"
+                                    >
+                                      <option value="DI">Disable</option>
+
+                                      <option
+                                        value="EN"
+                                        selected=""
+                                        data-select2-id="select2-data-6-cx4f"
+                                      >
+                                        Enable
+                                      </option></select
+                                    ><span
+                                      class="select2 select2-container select2-container--default"
+                                      dir="ltr"
+                                      data-select2-id="select2-data-5-cnxn"
+                                      style="width: 72px"
+                                      ><span class="selection"
+                                        ><span
+                                          class="select2-selection select2-selection--single"
+                                          role="combobox"
+                                          aria-haspopup="true"
+                                          aria-expanded="false"
+                                          tabindex="0"
+                                          aria-disabled="false"
+                                          aria-labelledby="select2-id_status-container"
+                                          aria-controls="select2-id_status-container"
+                                          ><span
+                                            class="select2-selection__rendered"
+                                            id="select2-id_status-container"
+                                            role="textbox"
+                                            aria-readonly="true"
+                                            title="Enable"
+                                            >Enable</span
+                                          ><span
+                                            class="select2-selection__arrow"
+                                            role="presentation"
+                                            ><b
+                                              role="presentation"
+                                            ></b></span></span></span
+                                      ><span
+                                        class="dropdown-wrapper"
+                                        aria-hidden="true"
+                                      ></span
+                                    ></span>
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-featured_image">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_featured_image"
+                                  >
+                                    Featured image
+                                  </label>
+                                  <div class="col-sm-7 field-featured_image">
+                                    <input
+                                      type="file"
+                                      name="featured_image"
+                                      accept="image/*"
+                                      id="id_featured_image"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div
+                                class="form-group field-featured_image_preview"
+                              >
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_featured_image_preview"
+                                  >
+                                    Featured image display
+                                  </label>
+                                  <div
+                                    class="col-sm-7 field-featured_image_preview"
+                                  >
+                                    <div class="readonly">-</div>
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-material">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_material"
+                                  >
+                                    Material
+                                  </label>
+                                  <div class="col-sm-7 field-material">
+                                    <div
+                                      class="related-widget-wrapper"
+                                      data-model-ref="material"
+                                    >
+                                      <select
+                                        name="material"
+                                        id="id_material"
+                                        multiple=""
+                                        data-select2-id="select2-data-id_material"
+                                        tabindex="-1"
+                                        class="select2-hidden-accessible"
+                                        aria-hidden="true"
+                                      ></select
+                                      ><span
+                                        class="select2 select2-container select2-container--default"
+                                        dir="ltr"
+                                        data-select2-id="select2-data-7-qfy0"
+                                        style="width: 41px"
+                                        ><span class="selection"
+                                          ><span
+                                            class="select2-selection select2-selection--multiple"
+                                            role="combobox"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                            tabindex="-1"
+                                            aria-disabled="false"
+                                            ><ul
+                                              class="select2-selection__rendered"
+                                              id="select2-id_material-container"
+                                            ></ul>
+                                            <span
+                                              class="select2-search select2-search--inline"
+                                            >
+                                              <textarea
+                                                class="select2-search__field"
+                                                type="search"
+                                                tabindex="0"
+                                                autocorrect="off"
+                                                autocapitalize="none"
+                                                spellcheck="false"
+                                                role="searchbox"
+                                                aria-autocomplete="list"
+                                                autocomplete="off"
+                                                aria-label="Search"
+                                                aria-describedby="select2-id_material-container"
+                                                placeholder=""
+                                                style="width: 0.75em"
+                                              ></textarea></span></span></span
+                                        ><span
+                                          class="dropdown-wrapper"
+                                          aria-hidden="true"
+                                        ></span
+                                      ></span>
+
+                                      <a
+                                        class="related-widget-wrapper-link add-related"
+                                        id="add_id_material"
+                                        data-popup="yes"
+                                        href="/admin/product/material/add/?_to_field=id&amp;_popup=1"
+                                        title="Add another material"
+                                        ><img
+                                          src="/static/admin/img/icon-addlink.svg"
+                                          alt="Add"
+                                      /></a>
+                                    </div>
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block">
+                                      Hold down “Control”, or “Command” on a
+                                      Mac, to select more than one.
+                                    </div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-unit">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_unit"
+                                  >
+                                    Unit
+                                  </label>
+                                  <div class="col-sm-7 field-unit">
+                                    <div
+                                      class="related-widget-wrapper"
+                                      data-model-ref="unit"
+                                    >
+                                      <select
+                                        name="unit"
+                                        id="id_unit"
+                                        data-select2-id="select2-data-id_unit"
+                                        tabindex="-1"
+                                        class="select2-hidden-accessible"
+                                        aria-hidden="true"
+                                      >
+                                        <option
+                                          value=""
+                                          selected=""
+                                          data-select2-id="select2-data-9-kdh0"
+                                        >
+                                          ---------
+                                        </option>
+
+                                        <option value="1">Pcs</option>
+
+                                        <option value="2">Set</option></select
+                                      ><span
+                                        class="select2 select2-container select2-container--default"
+                                        dir="ltr"
+                                        data-select2-id="select2-data-8-xe54"
+                                        style="width: 91px"
+                                        ><span class="selection"
+                                          ><span
+                                            class="select2-selection select2-selection--single"
+                                            role="combobox"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                            tabindex="0"
+                                            aria-disabled="false"
+                                            aria-labelledby="select2-id_unit-container"
+                                            aria-controls="select2-id_unit-container"
+                                            ><span
+                                              class="select2-selection__rendered"
+                                              id="select2-id_unit-container"
+                                              role="textbox"
+                                              aria-readonly="true"
+                                              title="---------"
+                                              >---------</span
+                                            ><span
+                                              class="select2-selection__arrow"
+                                              role="presentation"
+                                              ><b
+                                                role="presentation"
+                                              ></b></span></span></span
+                                        ><span
+                                          class="dropdown-wrapper"
+                                          aria-hidden="true"
+                                        ></span
+                                      ></span>
+
+                                      <a
+                                        class="related-widget-wrapper-link change-related"
+                                        id="change_id_unit"
+                                        data-href-template="/admin/product/unit/__fk__/change/?_to_field=id&amp;_popup=1"
+                                        data-popup="yes"
+                                        title="Change selected unit"
+                                        ><img
+                                          src="/static/admin/img/icon-changelink.svg"
+                                          alt="Change" /></a
+                                      ><a
+                                        class="related-widget-wrapper-link add-related"
+                                        id="add_id_unit"
+                                        data-popup="yes"
+                                        href="/admin/product/unit/add/?_to_field=id&amp;_popup=1"
+                                        title="Add another unit"
+                                        ><img
+                                          src="/static/admin/img/icon-addlink.svg"
+                                          alt="Add" /></a
+                                      ><a
+                                        class="related-widget-wrapper-link view-related"
+                                        id="view_id_unit"
+                                        data-href-template="/admin/product/unit/__fk__/change/?_to_field=id"
+                                        title="View selected unit"
+                                        ><img
+                                          src="/static/admin/img/icon-viewlink.svg"
+                                          alt="View"
+                                      /></a>
+                                    </div>
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-channel">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_channel"
+                                  >
+                                    Channel
+                                  </label>
+                                  <div class="col-sm-7 field-channel">
+                                    <div
+                                      class="related-widget-wrapper"
+                                      data-model-ref="channel"
+                                    >
+                                      <select
+                                        name="channel"
+                                        id="id_channel"
+                                        multiple=""
+                                        data-select2-id="select2-data-id_channel"
+                                        tabindex="-1"
+                                        class="select2-hidden-accessible"
+                                        aria-hidden="true"
+                                      >
+                                        <option value="1">ecommerce</option>
+
+                                        <option value="2">
+                                          mobile
+                                        </option></select
+                                      ><span
+                                        class="select2 select2-container select2-container--default"
+                                        dir="ltr"
+                                        data-select2-id="select2-data-10-22t5"
+                                        style="width: 123.328px"
+                                        ><span class="selection"
+                                          ><span
+                                            class="select2-selection select2-selection--multiple"
+                                            role="combobox"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                            tabindex="-1"
+                                            aria-disabled="false"
+                                            ><ul
+                                              class="select2-selection__rendered"
+                                              id="select2-id_channel-container"
+                                            ></ul>
+                                            <span
+                                              class="select2-search select2-search--inline"
+                                            >
+                                              <textarea
+                                                class="select2-search__field"
+                                                type="search"
+                                                tabindex="0"
+                                                autocorrect="off"
+                                                autocapitalize="none"
+                                                spellcheck="false"
+                                                role="searchbox"
+                                                aria-autocomplete="list"
+                                                autocomplete="off"
+                                                aria-label="Search"
+                                                aria-describedby="select2-id_channel-container"
+                                                placeholder=""
+                                                style="width: 0.75em"
+                                              ></textarea></span></span></span
+                                        ><span
+                                          class="dropdown-wrapper"
+                                          aria-hidden="true"
+                                        ></span
+                                      ></span>
+
+                                      <a
+                                        class="related-widget-wrapper-link add-related"
+                                        id="add_id_channel"
+                                        data-popup="yes"
+                                        href="/admin/product/channel/add/?_to_field=id&amp;_popup=1"
+                                        title="Add another channel"
+                                        ><img
+                                          src="/static/admin/img/icon-addlink.svg"
+                                          alt="Add"
+                                      /></a>
+                                    </div>
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block">
+                                      Hold down “Control”, or “Command” on a
+                                      Mac, to select more than one.
+                                    </div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-category">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_category"
+                                  >
+                                    Category
+                                  </label>
+                                  <div class="col-sm-7 field-category">
+                                    <div
+                                      class="related-widget-wrapper"
+                                      data-model-ref="category"
+                                    >
+                                      <select
+                                        name="category"
+                                        id="id_category"
+                                        multiple=""
+                                        data-select2-id="select2-data-id_category"
+                                        tabindex="-1"
+                                        class="select2-hidden-accessible"
+                                        aria-hidden="true"
+                                      >
+                                        <option value="1">Chairs</option>
+
+                                        <option value="2">Lounge Chair</option>
+
+                                        <option value="3">Loungers</option>
+
+                                        <option value="4">Tables</option>
+
+                                        <option value="5">Umbrellas</option>
+
+                                        <option value="6">Poufs</option>
+
+                                        <option value="7">Lighting</option>
+
+                                        <option value="8">Cushion Box</option>
+
+                                        <option value="9">Rugs</option>
+
+                                        <option value="10">
+                                          Cushion
+                                        </option></select
+                                      ><span
+                                        class="select2 select2-container select2-container--default"
+                                        dir="ltr"
+                                        data-select2-id="select2-data-11-mc2k"
+                                        style="width: 133.094px"
+                                        ><span class="selection"
+                                          ><span
+                                            class="select2-selection select2-selection--multiple"
+                                            role="combobox"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                            tabindex="-1"
+                                            aria-disabled="false"
+                                            ><ul
+                                              class="select2-selection__rendered"
+                                              id="select2-id_category-container"
+                                            ></ul>
+                                            <span
+                                              class="select2-search select2-search--inline"
+                                            >
+                                              <textarea
+                                                class="select2-search__field"
+                                                type="search"
+                                                tabindex="0"
+                                                autocorrect="off"
+                                                autocapitalize="none"
+                                                spellcheck="false"
+                                                role="searchbox"
+                                                aria-autocomplete="list"
+                                                autocomplete="off"
+                                                aria-label="Search"
+                                                aria-describedby="select2-id_category-container"
+                                                placeholder=""
+                                                style="width: 0.75em"
+                                              ></textarea></span></span></span
+                                        ><span
+                                          class="dropdown-wrapper"
+                                          aria-hidden="true"
+                                        ></span
+                                      ></span>
+
+                                      <a
+                                        class="related-widget-wrapper-link add-related"
+                                        id="add_id_category"
+                                        data-popup="yes"
+                                        href="/admin/product/category/add/?_to_field=id&amp;_popup=1"
+                                        title="Add another category"
+                                        ><img
+                                          src="/static/admin/img/icon-addlink.svg"
+                                          alt="Add"
+                                      /></a>
+                                    </div>
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block">
+                                      Hold down “Control”, or “Command” on a
+                                      Mac, to select more than one.
+                                    </div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-cost_price">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_cost_price"
+                                  >
+                                    Cost price
+                                  </label>
+                                  <div class="col-sm-7 field-cost_price">
+                                    <input
+                                      type="number"
+                                      name="cost_price"
+                                      step="0.01"
+                                      id="id_cost_price"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          id="product-specification-tab"
+                          class="tab-pane fade"
+                          role="tabpanel"
+                          aria-labelledby="product-specification-tab"
+                        >
+                          <div class="card">
+                            <div class="p-5 card-body">
+                              <div class="form-group field-ps_overal_dimension">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_overal_dimension"
+                                  >
+                                    Ps overal dimension
+                                  </label>
+                                  <div
+                                    class="col-sm-7 field-ps_overal_dimension"
+                                  >
+                                    <input
+                                      type="text"
+                                      name="ps_overal_dimension"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      id="id_ps_overal_dimension"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-ps_arm_height">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_arm_height"
+                                  >
+                                    Ps arm height
+                                  </label>
+                                  <div class="col-sm-7 field-ps_arm_height">
+                                    <input
+                                      type="number"
+                                      name="ps_arm_height"
+                                      step="0.01"
+                                      id="id_ps_arm_height"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-ps_seat_height">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_seat_height"
+                                  >
+                                    Ps seat height
+                                  </label>
+                                  <div class="col-sm-7 field-ps_seat_height">
+                                    <input
+                                      type="number"
+                                      name="ps_seat_height"
+                                      step="0.01"
+                                      id="id_ps_seat_height"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-ps_seat_depth">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_seat_depth"
+                                  >
+                                    Ps seat depth
+                                  </label>
+                                  <div class="col-sm-7 field-ps_seat_depth">
+                                    <input
+                                      type="number"
+                                      name="ps_seat_depth"
+                                      step="0.01"
+                                      id="id_ps_seat_depth"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-ps_nett_weight">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_nett_weight"
+                                  >
+                                    Ps nett weight
+                                  </label>
+                                  <div class="col-sm-7 field-ps_nett_weight">
+                                    <input
+                                      type="number"
+                                      name="ps_nett_weight"
+                                      step="0.01"
+                                      id="id_ps_nett_weight"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-ps_gross_weight">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_gross_weight"
+                                  >
+                                    Ps gross weight
+                                  </label>
+                                  <div class="col-sm-7 field-ps_gross_weight">
+                                    <input
+                                      type="number"
+                                      name="ps_gross_weight"
+                                      step="0.01"
+                                      id="id_ps_gross_weight"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-ps_product_type">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_product_type"
+                                  >
+                                    Ps product type
+                                  </label>
+                                  <div class="col-sm-7 field-ps_product_type">
+                                    <input
+                                      type="text"
+                                      name="ps_product_type"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      id="id_ps_product_type"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div
+                                class="form-group field-ps_seat_construction"
+                              >
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_seat_construction"
+                                  >
+                                    Ps seat construction
+                                  </label>
+                                  <div
+                                    class="col-sm-7 field-ps_seat_construction"
+                                  >
+                                    <input
+                                      type="text"
+                                      name="ps_seat_construction"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      id="id_ps_seat_construction"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          id="shipping-details-tab"
+                          class="tab-pane fade"
+                          role="tabpanel"
+                          aria-labelledby="shipping-details-tab"
+                        >
+                          <div class="card">
+                            <div class="p-5 card-body">
+                              <div class="form-group field-ps_box_dimension">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_box_dimension"
+                                  >
+                                    Ps box dimension
+                                  </label>
+                                  <div class="col-sm-7 field-ps_box_dimension">
+                                    <input
+                                      type="text"
+                                      name="ps_box_dimension"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      id="id_ps_box_dimension"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block">74,48,20</div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-ps_box_weight">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_box_weight"
+                                  >
+                                    Ps box weight
+                                  </label>
+                                  <div class="col-sm-7 field-ps_box_weight">
+                                    <input
+                                      type="text"
+                                      name="ps_box_weight"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      id="id_ps_box_weight"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-ps_pax">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_pax"
+                                  >
+                                    Ps pax
+                                  </label>
+                                  <div class="col-sm-7 field-ps_pax">
+                                    <input
+                                      type="text"
+                                      name="ps_pax"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      id="id_ps_pax"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-ps_20ft_container">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_20ft_container"
+                                  >
+                                    Ps 20ft container
+                                  </label>
+                                  <div class="col-sm-7 field-ps_20ft_container">
+                                    <input
+                                      type="text"
+                                      name="ps_20ft_container"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      id="id_ps_20ft_container"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-ps_40gp_container">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_40gp_container"
+                                  >
+                                    Ps 40gp container
+                                  </label>
+                                  <div class="col-sm-7 field-ps_40gp_container">
+                                    <input
+                                      type="text"
+                                      name="ps_40gp_container"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      id="id_ps_40gp_container"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-ps_40hq_container">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_ps_40hq_container"
+                                  >
+                                    Ps 40hq container
+                                  </label>
+                                  <div class="col-sm-7 field-ps_40hq_container">
+                                    <input
+                                      type="text"
+                                      name="ps_40hq_container"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      id="id_ps_40hq_container"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-cbm">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_cbm"
+                                  >
+                                    Cbm
+                                  </label>
+                                  <div class="col-sm-7 field-cbm">
+                                    <input
+                                      type="number"
+                                      name="cbm"
+                                      step="0.01"
+                                      id="id_cbm"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-moq">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_moq"
+                                  >
+                                    Moq
+                                  </label>
+                                  <div class="col-sm-7 field-moq">
+                                    <input
+                                      type="number"
+                                      name="moq"
+                                      value="0"
+                                      class="vIntegerField"
+                                      min="0"
+                                      id="id_moq"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          id="factory-drawing-tab"
+                          class="tab-pane fade"
+                          role="tabpanel"
+                          aria-labelledby="factory-drawing-tab"
+                        >
+                          <div class="card">
+                            <div class="p-5 card-body">
+                              <div
+                                class="form-group field-production_drawing_pdf"
+                              >
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_production_drawing_pdf"
+                                  >
+                                    Production drawing pdf
+                                  </label>
+                                  <div
+                                    class="col-sm-7 field-production_drawing_pdf"
+                                  >
+                                    <input
+                                      type="file"
+                                      name="production_drawing_pdf"
+                                      id="id_production_drawing_pdf"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div
+                                class="form-group field-production_drawing_archive"
+                              >
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_production_drawing_archive"
+                                  >
+                                    Production drawing archive
+                                  </label>
+                                  <div
+                                    class="col-sm-7 field-production_drawing_archive"
+                                  >
+                                    <input
+                                      type="file"
+                                      name="production_drawing_archive"
+                                      id="id_production_drawing_archive"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-assembly_pdf">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_assembly_pdf"
+                                  >
+                                    Assembly pdf
+                                  </label>
+                                  <div class="col-sm-7 field-assembly_pdf">
+                                    <input
+                                      type="file"
+                                      name="assembly_pdf"
+                                      id="id_assembly_pdf"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-assembly_archive">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_assembly_archive"
+                                  >
+                                    Assembly archive
+                                  </label>
+                                  <div class="col-sm-7 field-assembly_archive">
+                                    <input
+                                      type="file"
+                                      name="assembly_archive"
+                                      id="id_assembly_archive"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-bom_file">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_bom_file"
+                                  >
+                                    Bom file
+                                  </label>
+                                  <div class="col-sm-7 field-bom_file">
+                                    <input
+                                      type="file"
+                                      name="bom_file"
+                                      id="id_bom_file"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          id="dezign-studio-tab"
+                          class="tab-pane fade"
+                          role="tabpanel"
+                          aria-labelledby="dezign-studio-tab"
+                        >
+                          <div class="card">
+                            <div class="p-5 card-body">
+                              <div class="form-group field-drawing_3d_dwg">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_drawing_3d_dwg"
+                                  >
+                                    Drawing 3d dwg
+                                  </label>
+                                  <div class="col-sm-7 field-drawing_3d_dwg">
+                                    <input
+                                      type="file"
+                                      name="drawing_3d_dwg"
+                                      id="id_drawing_3d_dwg"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-drawing_3d_obj">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_drawing_3d_obj"
+                                  >
+                                    Drawing 3d obj
+                                  </label>
+                                  <div class="col-sm-7 field-drawing_3d_obj">
+                                    <input
+                                      type="file"
+                                      name="drawing_3d_obj"
+                                      id="id_drawing_3d_obj"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-drawing_3d_3dmax">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_drawing_3d_3dmax"
+                                  >
+                                    Drawing 3d 3dmax
+                                  </label>
+                                  <div class="col-sm-7 field-drawing_3d_3dmax">
+                                    <input
+                                      type="file"
+                                      name="drawing_3d_3dmax"
+                                      id="id_drawing_3d_3dmax"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-drawing_3d_sketchup">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_drawing_3d_sketchup"
+                                  >
+                                    Drawing 3d sketchup
+                                  </label>
+                                  <div
+                                    class="col-sm-7 field-drawing_3d_sketchup"
+                                  >
+                                    <input
+                                      type="file"
+                                      name="drawing_3d_sketchup"
+                                      id="id_drawing_3d_sketchup"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          id="seo-tab"
+                          class="tab-pane fade"
+                          role="tabpanel"
+                          aria-labelledby="seo-tab"
+                        >
+                          <div class="card">
+                            <div class="p-5 card-body">
+                              <div class="form-group field-seo_meta_title">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_seo_meta_title"
+                                  >
+                                    Seo meta title
+                                  </label>
+                                  <div class="col-sm-7 field-seo_meta_title">
+                                    <input
+                                      type="text"
+                                      name="seo_meta_title"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      id="id_seo_meta_title"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div
+                                class="form-group field-seo_meta_description"
+                              >
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_seo_meta_description"
+                                  >
+                                    Seo meta description
+                                  </label>
+                                  <div
+                                    class="col-sm-7 field-seo_meta_description"
+                                  >
+                                    <input
+                                      type="text"
+                                      name="seo_meta_description"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      id="id_seo_meta_description"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group field-seo_meta_keyword">
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_seo_meta_keyword"
+                                  >
+                                    Seo meta keyword
+                                  </label>
+                                  <div class="col-sm-7 field-seo_meta_keyword">
+                                    <input
+                                      type="text"
+                                      name="seo_meta_keyword"
+                                      class="vTextField"
+                                      maxlength="200"
+                                      id="id_seo_meta_keyword"
+                                    />
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div
+                                class="form-group field-seo_content_overview"
+                              >
+                                <div class="row">
+                                  <label
+                                    class="col-sm-3 text-left"
+                                    for="id_seo_content_overview"
+                                  >
+                                    Seo content overview
+                                  </label>
+                                  <div
+                                    class="col-sm-7 field-seo_content_overview"
+                                  >
+                                    <div
+                                      class="django-ckeditor-widget"
+                                      data-field-id="id_seo_content_overview"
+                                      style="display: inline-block"
+                                    >
+                                      <textarea
+                                        name="seo_content_overview"
+                                        cols="40"
+                                        rows="10"
+                                        id="id_seo_content_overview"
+                                        data-processed="1"
+                                        data-config='{"skin": "moono-lisa", "toolbar_Basic": [["Source", "-", "Bold", "Italic"]], "toolbar_Full": [["Styles", "Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker", "Undo", "Redo"], ["Link", "Unlink", "Anchor"], ["Image", "Flash", "Table", "HorizontalRule"], ["TextColor", "BGColor"], ["Smiley", "SpecialChar"], ["Source"]], "toolbar": "Full", "height": "full", "width": "full", "filebrowserWindowWidth": 940, "filebrowserWindowHeight": 725, "language": "en-us"}'
+                                        data-external-plugin-resources="[]"
+                                        data-id="id_seo_content_overview"
+                                        data-type="ckeditortype"
+                                        style="
+                                          visibility: hidden;
+                                          display: none;
+                                        "
+                                      ></textarea>
+                                      <div
+                                        id="cke_id_seo_content_overview"
+                                        class="cke_1 cke cke_reset cke_chrome cke_editor_id_seo_content_overview cke_ltr cke_browser_webkit"
+                                        dir="ltr"
+                                        lang="en"
+                                        role="application"
+                                        aria-labelledby="cke_id_seo_content_overview_arialbl"
+                                      >
+                                        <span
+                                          id="cke_id_seo_content_overview_arialbl"
+                                          class="cke_voice_label"
+                                          >Rich Text Editor,
+                                          id_seo_content_overview</span
+                                        >
+                                        <div
+                                          class="cke_inner cke_reset"
+                                          role="presentation"
+                                        >
+                                          <span
+                                            id="cke_1_top"
+                                            class="cke_top cke_reset_all"
+                                            role="presentation"
+                                            style="
+                                              height: auto;
+                                              user-select: none;
+                                            "
+                                            ><span
+                                              id="cke_13"
+                                              class="cke_voice_label"
+                                              >Editor toolbars</span
+                                            ><span
+                                              id="cke_1_toolbox"
+                                              class="cke_toolbox"
+                                              role="group"
+                                              aria-labelledby="cke_13"
+                                              onmousedown="return false;"
+                                              ><span
+                                                id="cke_16"
+                                                class="cke_toolbar"
+                                                role="toolbar"
+                                                ><span
+                                                  class="cke_toolbar_start"
+                                                ></span
+                                                ><span
+                                                  id="cke_14"
+                                                  class="cke_combo cke_combo__styles cke_combo_off"
+                                                  role="presentation"
+                                                  ><span
+                                                    id="cke_14_label"
+                                                    class="cke_combo_label"
+                                                    >Styles</span
+                                                  ><a
+                                                    class="cke_combo_button"
+                                                    title="Formatting Styles"
+                                                    tabindex="-1"
+                                                    href="javascript:void('Formatting Styles')"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_14_label"
+                                                    aria-haspopup="listbox"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(5,event,this);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(6,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(4,this);return false;"
+                                                    aria-expanded="false"
+                                                    ><span
+                                                      id="cke_14_text"
+                                                      class="cke_combo_text cke_combo_inlinelabel"
+                                                      >Styles</span
+                                                    ><span
+                                                      class="cke_combo_open"
+                                                      ><span
+                                                        class="cke_combo_arrow"
+                                                      ></span></span></a></span
+                                                ><span
+                                                  id="cke_15"
+                                                  class="cke_combo cke_combo__format cke_combo_off"
+                                                  role="presentation"
+                                                  ><span
+                                                    id="cke_15_label"
+                                                    class="cke_combo_label"
+                                                    >Format</span
+                                                  ><a
+                                                    class="cke_combo_button"
+                                                    title="Paragraph Format"
+                                                    tabindex="-1"
+                                                    href="javascript:void('Paragraph Format')"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_15_label"
+                                                    aria-haspopup="listbox"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(8,event,this);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(9,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(7,this);return false;"
+                                                    aria-expanded="false"
+                                                    ><span
+                                                      id="cke_15_text"
+                                                      class="cke_combo_text cke_combo_inlinelabel"
+                                                      >Format</span
+                                                    ><span
+                                                      class="cke_combo_open"
+                                                      ><span
+                                                        class="cke_combo_arrow"
+                                                      ></span></span></a></span
+                                                ><span
+                                                  class="cke_toolgroup"
+                                                  role="presentation"
+                                                  ><a
+                                                    id="cke_17"
+                                                    class="cke_button cke_button__bold cke_button_off"
+                                                    href="javascript:void('Bold')"
+                                                    title="Bold (Ctrl+B)"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_17_label"
+                                                    aria-describedby="cke_17_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="false"
+                                                    aria-pressed="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(10,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(11,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(12,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__bold_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -24px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_17_label"
+                                                      class="cke_button_label cke_button__bold_label"
+                                                      aria-hidden="false"
+                                                      >Bold</span
+                                                    ><span
+                                                      id="cke_17_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                      >&nbsp;Keyboard shortcut
+                                                      Ctrl+B</span
+                                                    ></a
+                                                  ><a
+                                                    id="cke_18"
+                                                    class="cke_button cke_button__italic cke_button_off"
+                                                    href="javascript:void('Italic')"
+                                                    title="Italic (Ctrl+I)"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_18_label"
+                                                    aria-describedby="cke_18_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="false"
+                                                    aria-pressed="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(13,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(14,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(15,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__italic_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -48px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_18_label"
+                                                      class="cke_button_label cke_button__italic_label"
+                                                      aria-hidden="false"
+                                                      >Italic</span
+                                                    ><span
+                                                      id="cke_18_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                      >&nbsp;Keyboard shortcut
+                                                      Ctrl+I</span
+                                                    ></a
+                                                  ><a
+                                                    id="cke_19"
+                                                    class="cke_button cke_button__underline cke_button_off"
+                                                    href="javascript:void('Underline')"
+                                                    title="Underline (Ctrl+U)"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_19_label"
+                                                    aria-describedby="cke_19_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="false"
+                                                    aria-pressed="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(16,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(17,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(18,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__underline_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -144px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_19_label"
+                                                      class="cke_button_label cke_button__underline_label"
+                                                      aria-hidden="false"
+                                                      >Underline</span
+                                                    ><span
+                                                      id="cke_19_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                      >&nbsp;Keyboard shortcut
+                                                      Ctrl+U</span
+                                                    ></a
+                                                  ><a
+                                                    id="cke_20"
+                                                    class="cke_button cke_button__strike cke_button_off"
+                                                    href="javascript:void('Strikethrough')"
+                                                    title="Strikethrough"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_20_label"
+                                                    aria-describedby="cke_20_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="false"
+                                                    aria-pressed="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(19,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(20,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(21,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__strike_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -72px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_20_label"
+                                                      class="cke_button_label cke_button__strike_label"
+                                                      aria-hidden="false"
+                                                      >Strikethrough</span
+                                                    ><span
+                                                      id="cke_20_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                    ></span></a
+                                                  ><a
+                                                    id="cke_21"
+                                                    class="cke_button cke_button__undo cke_button_disabled"
+                                                    href="javascript:void('Undo')"
+                                                    title="Undo (Ctrl+Z)"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_21_label"
+                                                    aria-describedby="cke_21_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="true"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(22,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(23,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(24,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__undo_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -2016px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_21_label"
+                                                      class="cke_button_label cke_button__undo_label"
+                                                      aria-hidden="false"
+                                                      >Undo</span
+                                                    ><span
+                                                      id="cke_21_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                      >&nbsp;Keyboard shortcut
+                                                      Ctrl+Z</span
+                                                    ></a
+                                                  ><a
+                                                    id="cke_22"
+                                                    class="cke_button cke_button__redo cke_button_disabled"
+                                                    href="javascript:void('Redo')"
+                                                    title="Redo (Ctrl+Y)"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_22_label"
+                                                    aria-describedby="cke_22_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="true"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(25,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(26,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(27,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__redo_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -1968px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_22_label"
+                                                      class="cke_button_label cke_button__redo_label"
+                                                      aria-hidden="false"
+                                                      >Redo</span
+                                                    ><span
+                                                      id="cke_22_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                      >&nbsp;Keyboard shortcut
+                                                      Ctrl+Y</span
+                                                    ></a
+                                                  ></span
+                                                ><span
+                                                  class="cke_toolbar_end"
+                                                ></span></span
+                                              ><span
+                                                id="cke_23"
+                                                class="cke_toolbar"
+                                                role="toolbar"
+                                                ><span
+                                                  class="cke_toolbar_start"
+                                                ></span
+                                                ><span
+                                                  class="cke_toolgroup"
+                                                  role="presentation"
+                                                  ><a
+                                                    id="cke_24"
+                                                    class="cke_button cke_button__link cke_button_off"
+                                                    href="javascript:void('Link')"
+                                                    title="Link (Ctrl+K)"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_24_label"
+                                                    aria-describedby="cke_24_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(28,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(29,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(30,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__link_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -1272px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_24_label"
+                                                      class="cke_button_label cke_button__link_label"
+                                                      aria-hidden="false"
+                                                      >Link</span
+                                                    ><span
+                                                      id="cke_24_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                      >&nbsp;Keyboard shortcut
+                                                      Ctrl+K</span
+                                                    ></a
+                                                  ><a
+                                                    id="cke_25"
+                                                    class="cke_button cke_button__unlink cke_button_disabled"
+                                                    href="javascript:void('Unlink')"
+                                                    title="Unlink"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_25_label"
+                                                    aria-describedby="cke_25_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="true"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(31,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(32,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(33,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__unlink_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -1296px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_25_label"
+                                                      class="cke_button_label cke_button__unlink_label"
+                                                      aria-hidden="false"
+                                                      >Unlink</span
+                                                    ><span
+                                                      id="cke_25_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                    ></span></a
+                                                  ><a
+                                                    id="cke_26"
+                                                    class="cke_button cke_button__anchor cke_button_off"
+                                                    href="javascript:void('Anchor')"
+                                                    title="Anchor"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_26_label"
+                                                    aria-describedby="cke_26_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(34,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(35,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(36,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__anchor_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -1248px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_26_label"
+                                                      class="cke_button_label cke_button__anchor_label"
+                                                      aria-hidden="false"
+                                                      >Anchor</span
+                                                    ><span
+                                                      id="cke_26_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                    ></span></a></span
+                                                ><span
+                                                  class="cke_toolbar_end"
+                                                ></span></span
+                                              ><span
+                                                id="cke_27"
+                                                class="cke_toolbar"
+                                                role="toolbar"
+                                                ><span
+                                                  class="cke_toolbar_start"
+                                                ></span
+                                                ><span
+                                                  class="cke_toolgroup"
+                                                  role="presentation"
+                                                  ><a
+                                                    id="cke_28"
+                                                    class="cke_button cke_button__image cke_button_off"
+                                                    href="javascript:void('Image')"
+                                                    title="Image"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_28_label"
+                                                    aria-describedby="cke_28_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(37,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(38,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(39,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__image_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -960px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_28_label"
+                                                      class="cke_button_label cke_button__image_label"
+                                                      aria-hidden="false"
+                                                      >Image</span
+                                                    ><span
+                                                      id="cke_28_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                    ></span></a
+                                                  ><a
+                                                    id="cke_29"
+                                                    class="cke_button cke_button__table cke_button_off"
+                                                    href="javascript:void('Table')"
+                                                    title="Table"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_29_label"
+                                                    aria-describedby="cke_29_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(40,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(41,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(42,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__table_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -1920px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_29_label"
+                                                      class="cke_button_label cke_button__table_label"
+                                                      aria-hidden="false"
+                                                      >Table</span
+                                                    ><span
+                                                      id="cke_29_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                    ></span></a
+                                                  ><a
+                                                    id="cke_30"
+                                                    class="cke_button cke_button__horizontalrule cke_button_off"
+                                                    href="javascript:void('Insert Horizontal Line')"
+                                                    title="Insert Horizontal Line"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_30_label"
+                                                    aria-describedby="cke_30_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(43,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(44,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(45,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__horizontalrule_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -912px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_30_label"
+                                                      class="cke_button_label cke_button__horizontalrule_label"
+                                                      aria-hidden="false"
+                                                      >Insert Horizontal
+                                                      Line</span
+                                                    ><span
+                                                      id="cke_30_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                    ></span></a></span
+                                                ><span
+                                                  class="cke_toolbar_end"
+                                                ></span></span
+                                              ><span
+                                                id="cke_31"
+                                                class="cke_toolbar"
+                                                role="toolbar"
+                                                ><span
+                                                  class="cke_toolbar_start"
+                                                ></span
+                                                ><span
+                                                  class="cke_toolgroup"
+                                                  role="presentation"
+                                                  ><a
+                                                    id="cke_32"
+                                                    class="cke_button cke_button__textcolor cke_button_expandable cke_button_off"
+                                                    href="javascript:void('Text Color')"
+                                                    title="Text Color"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_32_label"
+                                                    aria-describedby="cke_32_description"
+                                                    aria-haspopup="listbox"
+                                                    aria-disabled="false"
+                                                    aria-expanded="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(46,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(47,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(48,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__textcolor_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -408px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_32_label"
+                                                      class="cke_button_label cke_button__textcolor_label"
+                                                      aria-hidden="false"
+                                                      >Text Color</span
+                                                    ><span
+                                                      id="cke_32_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                    ></span
+                                                    ><span
+                                                      class="cke_button_arrow"
+                                                    ></span></a
+                                                  ><a
+                                                    id="cke_33"
+                                                    class="cke_button cke_button__bgcolor cke_button_expandable cke_button_off"
+                                                    href="javascript:void('Background Color')"
+                                                    title="Background Color"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_33_label"
+                                                    aria-describedby="cke_33_description"
+                                                    aria-haspopup="listbox"
+                                                    aria-disabled="false"
+                                                    aria-expanded="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(49,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(50,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(51,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__bgcolor_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -384px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_33_label"
+                                                      class="cke_button_label cke_button__bgcolor_label"
+                                                      aria-hidden="false"
+                                                      >Background Color</span
+                                                    ><span
+                                                      id="cke_33_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                    ></span
+                                                    ><span
+                                                      class="cke_button_arrow"
+                                                    ></span></a></span
+                                                ><span
+                                                  class="cke_toolbar_end"
+                                                ></span></span
+                                              ><span
+                                                id="cke_34"
+                                                class="cke_toolbar"
+                                                role="toolbar"
+                                                ><span
+                                                  class="cke_toolbar_start"
+                                                ></span
+                                                ><span
+                                                  class="cke_toolgroup"
+                                                  role="presentation"
+                                                  ><a
+                                                    id="cke_35"
+                                                    class="cke_button cke_button__smiley cke_button_off"
+                                                    href="javascript:void('Smiley')"
+                                                    title="Smiley"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_35_label"
+                                                    aria-describedby="cke_35_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(52,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(53,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(54,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__smiley_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -1080px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_35_label"
+                                                      class="cke_button_label cke_button__smiley_label"
+                                                      aria-hidden="false"
+                                                      >Smiley</span
+                                                    ><span
+                                                      id="cke_35_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                    ></span></a
+                                                  ><a
+                                                    id="cke_36"
+                                                    class="cke_button cke_button__specialchar cke_button_off"
+                                                    href="javascript:void('Insert Special Character')"
+                                                    title="Insert Special Character"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_36_label"
+                                                    aria-describedby="cke_36_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(55,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(56,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(57,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__specialchar_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -1872px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_36_label"
+                                                      class="cke_button_label cke_button__specialchar_label"
+                                                      aria-hidden="false"
+                                                      >Insert Special
+                                                      Character</span
+                                                    ><span
+                                                      id="cke_36_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                    ></span></a></span
+                                                ><span
+                                                  class="cke_toolbar_end"
+                                                ></span></span
+                                              ><span
+                                                id="cke_37"
+                                                class="cke_toolbar cke_toolbar_last"
+                                                role="toolbar"
+                                                ><span
+                                                  class="cke_toolbar_start"
+                                                ></span
+                                                ><span
+                                                  class="cke_toolgroup"
+                                                  role="presentation"
+                                                  ><a
+                                                    id="cke_38"
+                                                    class="cke_button cke_button__source cke_button_off"
+                                                    href="javascript:void('Source')"
+                                                    title="Source"
+                                                    tabindex="-1"
+                                                    hidefocus="true"
+                                                    role="button"
+                                                    aria-labelledby="cke_38_label"
+                                                    aria-describedby="cke_38_description"
+                                                    aria-haspopup="false"
+                                                    aria-disabled="false"
+                                                    aria-pressed="false"
+                                                    onkeydown="return CKEDITOR.tools.callFunction(58,event);"
+                                                    onfocus="return CKEDITOR.tools.callFunction(59,event);"
+                                                    onclick="CKEDITOR.tools.callFunction(60,this);return false;"
+                                                    ><span
+                                                      class="cke_button_icon cke_button__source_icon"
+                                                      style="
+                                                        background-image: url('http://www.pimcloud.co:8001/static/ckeditor/ckeditor/plugins/icons.png?t=M6K9');
+                                                        background-position: 0 -1848px;
+                                                        background-size: auto;
+                                                      "
+                                                      >&nbsp;</span
+                                                    ><span
+                                                      id="cke_38_label"
+                                                      class="cke_button_label cke_button__source_label"
+                                                      aria-hidden="false"
+                                                      >Source</span
+                                                    ><span
+                                                      id="cke_38_description"
+                                                      class="cke_button_label"
+                                                      aria-hidden="false"
+                                                    ></span></a></span
+                                                ><span
+                                                  class="cke_toolbar_end"
+                                                ></span></span></span
+                                          ></span>
+                                          <div
+                                            id="cke_1_contents"
+                                            class="cke_contents cke_reset"
+                                            role="presentation"
+                                          >
+                                            <span
+                                              id="cke_43"
+                                              class="cke_voice_label"
+                                              >Press ALT 0 for help</span
+                                            ><iframe
+                                              src=""
+                                              frameborder="0"
+                                              class="cke_wysiwyg_frame cke_reset"
+                                              title="Editor, id_seo_content_overview"
+                                              aria-describedby="cke_43"
+                                              tabindex="0"
+                                              allowtransparency="true"
+                                              style="width: 100%; height: 100%"
+                                            ></iframe>
+                                          </div>
+                                          <span
+                                            id="cke_1_bottom"
+                                            class="cke_bottom cke_reset_all"
+                                            role="presentation"
+                                            style="user-select: none"
+                                            ><span
+                                              id="cke_1_resizer"
+                                              class="cke_resizer cke_resizer_vertical cke_resizer_ltr"
+                                              title="Resize"
+                                              onmousedown="CKEDITOR.tools.callFunction(2, event)"
+                                              >◢</span
+                                            ><span
+                                              id="cke_1_path_label"
+                                              class="cke_voice_label"
+                                              >Elements path</span
+                                            ><span
+                                              id="cke_1_path"
+                                              class="cke_path"
+                                              role="group"
+                                              aria-labelledby="cke_1_path_label"
+                                              ><span class="cke_path_empty"
+                                                >&nbsp;</span
+                                              ></span
+                                            ></span
+                                          >
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="help-block red"></div>
+
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          id="ambience-images-tab"
+                          class="tab-pane fade"
+                          role="tabpanel"
+                          aria-labelledby="ambience-images-tab"
+                        >
+                          <div
+                            class="js-inline-admin-formset inline-group"
+                            id="ambience_image-group"
+                            data-inline-type="tabular"
+                            data-inline-formset='{"name": "#ambience_image", "options": {"prefix": "ambience_image", "addText": "Add another Ambience image", "deleteText": "Remove"}}'
+                          >
+                            <div class="tabular inline-related">
+                              <input
+                                type="hidden"
+                                name="ambience_image-TOTAL_FORMS"
+                                value="1"
+                                id="id_ambience_image-TOTAL_FORMS"
+                                autocomplete="off"
+                              /><input
+                                type="hidden"
+                                name="ambience_image-INITIAL_FORMS"
+                                value="0"
+                                id="id_ambience_image-INITIAL_FORMS"
+                              /><input
+                                type="hidden"
+                                name="ambience_image-MIN_NUM_FORMS"
+                                value="0"
+                                id="id_ambience_image-MIN_NUM_FORMS"
+                                autocomplete="off"
+                              /><input
+                                type="hidden"
+                                name="ambience_image-MAX_NUM_FORMS"
+                                value="1000"
+                                id="id_ambience_image-MAX_NUM_FORMS"
+                                autocomplete="off"
+                              />
+                              <fieldset class="module">
+                                <table class="table table-hover text-nowrap">
+                                  <thead>
+                                    <tr>
+                                      <th class="original"></th>
+
+                                      <th class="column-ambience_image_preview">
+                                        Ambience image display
+                                      </th>
+
+                                      <th class="column-image required">
+                                        Image
+                                      </th>
+
+                                      <th>Delete?</th>
+                                    </tr>
+                                  </thead>
+
+                                  <tbody>
+                                    <tr
+                                      class="form-row dynamic-ambience_image"
+                                      id="ambience_image-0"
+                                    >
+                                      <td class="original">
+                                        <i
+                                          class="fas fa-plus fa-sm text-success"
+                                        >
+                                        </i>
+
+                                        <input
+                                          type="hidden"
+                                          name="ambience_image-0-id"
+                                          id="id_ambience_image-0-id"
+                                        />
+                                        <input
+                                          type="hidden"
+                                          name="ambience_image-0-product"
+                                          id="id_ambience_image-0-product"
+                                        />
+                                      </td>
+
+                                      <td class="field-ambience_image_preview">
+                                        <p>-</p>
+                                      </td>
+
+                                      <td class="field-image">
+                                        <input
+                                          type="file"
+                                          name="ambience_image-0-image"
+                                          accept="image/*"
+                                          id="id_ambience_image-0-image"
+                                        />
+                                        <div class="help-block text-red"></div>
+                                      </td>
+
+                                      <td class="delete">
+                                        <div>
+                                          <a class="inline-deletelink" href="#"
+                                            >Remove</a
+                                          >
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr
+                                      class="form-row empty-form"
+                                      id="ambience_image-empty"
+                                    >
+                                      <td class="original">
+                                        <i
+                                          class="fas fa-plus fa-sm text-success"
+                                        >
+                                        </i>
+
+                                        <input
+                                          type="hidden"
+                                          name="ambience_image-__prefix__-id"
+                                          id="id_ambience_image-__prefix__-id"
+                                        />
+                                        <input
+                                          type="hidden"
+                                          name="ambience_image-__prefix__-product"
+                                          id="id_ambience_image-__prefix__-product"
+                                        />
+                                      </td>
+
+                                      <td class="field-ambience_image_preview">
+                                        <p>-</p>
+                                      </td>
+
+                                      <td class="field-image">
+                                        <input
+                                          type="file"
+                                          name="ambience_image-__prefix__-image"
+                                          accept="image/*"
+                                          id="id_ambience_image-__prefix__-image"
+                                        />
+                                        <div class="help-block text-red"></div>
+                                      </td>
+
+                                      <td class="delete"></td>
+                                    </tr>
+
+                                    <tr class="add-row">
+                                      <td colspan="4">
+                                        <a
+                                          href="#"
+                                          class="btn btn-sm btn-default float-right"
+                                          >Add another Ambience image</a
+                                        >
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </fieldset>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          id="specification-images-tab"
+                          class="tab-pane fade"
+                          role="tabpanel"
+                          aria-labelledby="specification-images-tab"
+                        >
+                          <div
+                            class="js-inline-admin-formset inline-group"
+                            id="spec_image-group"
+                            data-inline-type="tabular"
+                            data-inline-formset='{"name": "#spec_image", "options": {"prefix": "spec_image", "addText": "Add another Specification image", "deleteText": "Remove"}}'
+                          >
+                            <div class="tabular inline-related">
+                              <input
+                                type="hidden"
+                                name="spec_image-TOTAL_FORMS"
+                                value="1"
+                                id="id_spec_image-TOTAL_FORMS"
+                                autocomplete="off"
+                              /><input
+                                type="hidden"
+                                name="spec_image-INITIAL_FORMS"
+                                value="0"
+                                id="id_spec_image-INITIAL_FORMS"
+                              /><input
+                                type="hidden"
+                                name="spec_image-MIN_NUM_FORMS"
+                                value="0"
+                                id="id_spec_image-MIN_NUM_FORMS"
+                                autocomplete="off"
+                              /><input
+                                type="hidden"
+                                name="spec_image-MAX_NUM_FORMS"
+                                value="1000"
+                                id="id_spec_image-MAX_NUM_FORMS"
+                                autocomplete="off"
+                              />
+                              <fieldset class="module">
+                                <table class="table table-hover text-nowrap">
+                                  <thead>
+                                    <tr>
+                                      <th class="original"></th>
+
+                                      <th
+                                        class="column-specification_image_preview"
+                                      >
+                                        Specification image display
+                                      </th>
+
+                                      <th class="column-image required">
+                                        Image
+                                      </th>
+
+                                      <th>Delete?</th>
+                                    </tr>
+                                  </thead>
+
+                                  <tbody>
+                                    <tr
+                                      class="form-row dynamic-spec_image"
+                                      id="spec_image-0"
+                                    >
+                                      <td class="original">
+                                        <i
+                                          class="fas fa-plus fa-sm text-success"
+                                        >
+                                        </i>
+
+                                        <input
+                                          type="hidden"
+                                          name="spec_image-0-id"
+                                          id="id_spec_image-0-id"
+                                        />
+                                        <input
+                                          type="hidden"
+                                          name="spec_image-0-product"
+                                          id="id_spec_image-0-product"
+                                        />
+                                      </td>
+
+                                      <td
+                                        class="field-specification_image_preview"
+                                      >
+                                        <p>-</p>
+                                      </td>
+
+                                      <td class="field-image">
+                                        <input
+                                          type="file"
+                                          name="spec_image-0-image"
+                                          accept="image/*"
+                                          id="id_spec_image-0-image"
+                                        />
+                                        <div class="help-block text-red"></div>
+                                      </td>
+
+                                      <td class="delete">
+                                        <div>
+                                          <a class="inline-deletelink" href="#"
+                                            >Remove</a
+                                          >
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr
+                                      class="form-row empty-form"
+                                      id="spec_image-empty"
+                                    >
+                                      <td class="original">
+                                        <i
+                                          class="fas fa-plus fa-sm text-success"
+                                        >
+                                        </i>
+
+                                        <input
+                                          type="hidden"
+                                          name="spec_image-__prefix__-id"
+                                          id="id_spec_image-__prefix__-id"
+                                        />
+                                        <input
+                                          type="hidden"
+                                          name="spec_image-__prefix__-product"
+                                          id="id_spec_image-__prefix__-product"
+                                        />
+                                      </td>
+
+                                      <td
+                                        class="field-specification_image_preview"
+                                      >
+                                        <p>-</p>
+                                      </td>
+
+                                      <td class="field-image">
+                                        <input
+                                          type="file"
+                                          name="spec_image-__prefix__-image"
+                                          accept="image/*"
+                                          id="id_spec_image-__prefix__-image"
+                                        />
+                                        <div class="help-block text-red"></div>
+                                      </td>
+
+                                      <td class="delete"></td>
+                                    </tr>
+
+                                    <tr class="add-row">
+                                      <td colspan="4">
+                                        <a
+                                          href="#"
+                                          class="btn btn-sm btn-default float-right"
+                                          >Add another Specification image</a
+                                        >
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </fieldset>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          id="technical-images-tab"
+                          class="tab-pane fade"
+                          role="tabpanel"
+                          aria-labelledby="technical-images-tab"
+                        >
+                          <div
+                            class="js-inline-admin-formset inline-group"
+                            id="technical_image-group"
+                            data-inline-type="tabular"
+                            data-inline-formset='{"name": "#technical_image", "options": {"prefix": "technical_image", "addText": "Add another Technical image", "deleteText": "Remove"}}'
+                          >
+                            <div class="tabular inline-related last-related">
+                              <input
+                                type="hidden"
+                                name="technical_image-TOTAL_FORMS"
+                                value="1"
+                                id="id_technical_image-TOTAL_FORMS"
+                                autocomplete="off"
+                              /><input
+                                type="hidden"
+                                name="technical_image-INITIAL_FORMS"
+                                value="0"
+                                id="id_technical_image-INITIAL_FORMS"
+                              /><input
+                                type="hidden"
+                                name="technical_image-MIN_NUM_FORMS"
+                                value="0"
+                                id="id_technical_image-MIN_NUM_FORMS"
+                                autocomplete="off"
+                              /><input
+                                type="hidden"
+                                name="technical_image-MAX_NUM_FORMS"
+                                value="1000"
+                                id="id_technical_image-MAX_NUM_FORMS"
+                                autocomplete="off"
+                              />
+                              <fieldset class="module">
+                                <table class="table table-hover text-nowrap">
+                                  <thead>
+                                    <tr>
+                                      <th class="original"></th>
+
+                                      <th
+                                        class="column-technical_image_preview"
+                                      >
+                                        Technical image display
+                                      </th>
+
+                                      <th class="column-image required">
+                                        Image
+                                      </th>
+
+                                      <th>Delete?</th>
+                                    </tr>
+                                  </thead>
+
+                                  <tbody>
+                                    <tr
+                                      class="form-row dynamic-technical_image"
+                                      id="technical_image-0"
+                                    >
+                                      <td class="original">
+                                        <i
+                                          class="fas fa-plus fa-sm text-success"
+                                        >
+                                        </i>
+
+                                        <input
+                                          type="hidden"
+                                          name="technical_image-0-id"
+                                          id="id_technical_image-0-id"
+                                        />
+                                        <input
+                                          type="hidden"
+                                          name="technical_image-0-product"
+                                          id="id_technical_image-0-product"
+                                        />
+                                      </td>
+
+                                      <td class="field-technical_image_preview">
+                                        <p>-</p>
+                                      </td>
+
+                                      <td class="field-image">
+                                        <input
+                                          type="file"
+                                          name="technical_image-0-image"
+                                          accept="image/*"
+                                          id="id_technical_image-0-image"
+                                        />
+                                        <div class="help-block text-red"></div>
+                                      </td>
+
+                                      <td class="delete">
+                                        <div>
+                                          <a class="inline-deletelink" href="#"
+                                            >Remove</a
+                                          >
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr
+                                      class="form-row empty-form"
+                                      id="technical_image-empty"
+                                    >
+                                      <td class="original">
+                                        <i
+                                          class="fas fa-plus fa-sm text-success"
+                                        >
+                                        </i>
+
+                                        <input
+                                          type="hidden"
+                                          name="technical_image-__prefix__-id"
+                                          id="id_technical_image-__prefix__-id"
+                                        />
+                                        <input
+                                          type="hidden"
+                                          name="technical_image-__prefix__-product"
+                                          id="id_technical_image-__prefix__-product"
+                                        />
+                                      </td>
+
+                                      <td class="field-technical_image_preview">
+                                        <p>-</p>
+                                      </td>
+
+                                      <td class="field-image">
+                                        <input
+                                          type="file"
+                                          name="technical_image-__prefix__-image"
+                                          accept="image/*"
+                                          id="id_technical_image-__prefix__-image"
+                                        />
+                                        <div class="help-block text-red"></div>
+                                      </td>
+
+                                      <td class="delete"></td>
+                                    </tr>
+
+                                    <tr class="add-row">
+                                      <td colspan="4">
+                                        <a
+                                          href="#"
+                                          class="btn btn-sm btn-default float-right"
+                                          >Add another Technical image</a
+                                        >
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </fieldset>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-lg-3">
+                  <div id="jazzy-actions" class="">
+                    <div>
+                      <div class="form-group">
+                        <input
+                          type="submit"
+                          value="Save"
+                          class="btn btn-success form-control"
+                          name="_save"
+                        />
+                      </div>
+
+                      <div class="form-group">
+                        <input
+                          type="submit"
+                          class="btn btn-info form-control"
+                          value="Save and add another"
+                          name="_addanother"
+                        />
+                      </div>
+
+                      <div class="form-group">
+                        <input
+                          type="submit"
+                          class="btn btn-info form-control"
+                          value="Save and continue editing"
+                          name="_continue"
+                        />
+                      </div>
+
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <h5 class="card-title">
+                                <u>General Information</u>
+                              </h5>
+                              <br />
+                              <p class="text-dark mr-4">
+                                Complete Fields:
+                                <span class="text-success">80%</span>
+                              </p>
+                              <p class="text-dark mr-4">
+                                Missing Fields:
+                                <span class="text-danger">20%</span>
+                              </p>
+                            </div>
+                            <div class="col text-center">
+                              <input
+                                type="text"
+                                class="knob"
+                                value="80"
+                                data-skin="tron"
+                                data-thickness="0.2"
+                                data-width="90"
+                                data-height="90"
+                                data-fgColor="#3c8dbc"
+                                data-readonly="true"
+                              />
+                              <div class="knob-label">80% Completness</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <script
+                    type="text/javascript"
+                    id="django-admin-form-add-constants"
+                    src="/static/admin/js/change_form.js"
+                    data-model-name="product"
+                  ></script>
+
+                  <script
+                    id="django-admin-prepopulated-fields-constants"
+                    src="/static/admin/js/prepopulate_init.js"
+                    data-prepopulated-fields="[]"
+                  ></script>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-default">
+        <div class="card-header">
+          <h3 class="card-title">
+            Ambience Image <small><em>jQuery File Upload</em> like look</small>
+          </h3>
+        </div>
+        <div class="card-body">
+          <div id="actions" class="row">
+            <div class="col-lg-6">
+              <div class="btn-group w-100">
+                <span class="btn btn-success col fileinput-button dz-clickable">
+                  <i class="fas fa-plus"></i>
+                  <span>Add files</span>
+                </span>
+                <button type="submit" class="btn btn-primary col start">
+                  <i class="fas fa-upload"></i>
+                  <span>Start upload</span>
+                </button>
+                <button type="reset" class="btn btn-warning col cancel">
+                  <i class="fas fa-times-circle"></i>
+                  <span>Cancel upload</span>
+                </button>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center">
+              <div class="fileupload-process w-100">
+                <div
+                  id="total-progress"
+                  class="progress progress-striped active"
+                  role="progressbar"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="0"
+                >
+                  <div
+                    class="progress-bar progress-bar-success"
+                    style="width: 0%"
+                    data-dz-uploadprogress=""
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table table-striped files" id="previews"></div>
+        </div>
+
+        <div class="card-footer">
+          Visit
+          <a href="https://www.dropzonejs.com">dropzone.js documentation</a> for
+          more examples and information about the plugin.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h4 class="card-title">Ambience Image Gallery</h4>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="btn-group w-100 mb-2">
+            <a
+              class="btn btn-info active"
+              href="javascript:void(0)"
+              data-filter="all"
+            >
+              All items
+            </a>
+            <a class="btn btn-info" href="javascript:void(0)" data-filter="1">
+              Category 1 (WHITE)
+            </a>
+            <a class="btn btn-info" href="javascript:void(0)" data-filter="2">
+              Category 2 (BLACK)
+            </a>
+            <a class="btn btn-info" href="javascript:void(0)" data-filter="3">
+              Category 3 (COLORED)
+            </a>
+            <a class="btn btn-info" href="javascript:void(0)" data-filter="4">
+              Category 4 (COLORED, BLACK)
+            </a>
+          </div>
+          <div class="mb-2">
+            <a
+              class="btn btn-secondary"
+              href="javascript:void(0)"
+              data-shuffle=""
+            >
+              Shuffle items
+            </a>
+            <div class="float-right">
+              <select
+                class="custom-select"
+                style="width: auto"
+                data-sortorder=""
+              >
+                <option value="index">Sort by Position</option>
+                <option value="sortData">Sort by Custom Data</option>
+              </select>
+              <div class="btn-group">
+                <a
+                  class="btn btn-default"
+                  href="javascript:void(0)"
+                  data-sortasc=""
+                >
+                  Ascending
+                </a>
+                <a
+                  class="btn btn-default"
+                  href="javascript:void(0)"
+                  data-sortdesc=""
+                >
+                  Descending
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            class="filter-container p-0 row"
+            style="
+              padding: 3px;
+              position: relative;
+              width: 100%;
+              display: flex;
+              flex-wrap: wrap;
+              height: 341px;
+            "
+          >
+            <div
+              class="filtr-item col-sm-2"
+              data-category="1"
+              data-sort="white sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(0px, 0px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FFFFFF.png?text=1"
+                data-toggle="lightbox"
+                data-title="sample 1 - white"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FFFFFF?text=1"
+                  class="img-fluid mb-2"
+                  alt="white sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="2, 4"
+              data-sort="black sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(176px, 0px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/000000.png?text=2"
+                data-toggle="lightbox"
+                data-title="sample 2 - black"
+              >
+                <img
+                  src="https://via.placeholder.com/300/000000?text=2"
+                  class="img-fluid mb-2"
+                  alt="black sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="3, 4"
+              data-sort="red sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(352px, 0px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FF0000/FFFFFF.png?text=3"
+                data-toggle="lightbox"
+                data-title="sample 3 - red"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FF0000/FFFFFF?text=3"
+                  class="img-fluid mb-2"
+                  alt="red sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="3, 4"
+              data-sort="red sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(528px, 0px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FF0000/FFFFFF.png?text=4"
+                data-toggle="lightbox"
+                data-title="sample 4 - red"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FF0000/FFFFFF?text=4"
+                  class="img-fluid mb-2"
+                  alt="red sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="2, 4"
+              data-sort="black sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(704px, 0px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/000000.png?text=5"
+                data-toggle="lightbox"
+                data-title="sample 5 - black"
+              >
+                <img
+                  src="https://via.placeholder.com/300/000000?text=5"
+                  class="img-fluid mb-2"
+                  alt="black sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="1"
+              data-sort="white sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(880px, 0px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FFFFFF.png?text=6"
+                data-toggle="lightbox"
+                data-title="sample 6 - white"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FFFFFF?text=6"
+                  class="img-fluid mb-2"
+                  alt="white sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="1"
+              data-sort="white sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(0px, 169px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FFFFFF.png?text=7"
+                data-toggle="lightbox"
+                data-title="sample 7 - white"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FFFFFF?text=7"
+                  class="img-fluid mb-2"
+                  alt="white sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="2, 4"
+              data-sort="black sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(176px, 169px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/000000.png?text=8"
+                data-toggle="lightbox"
+                data-title="sample 8 - black"
+              >
+                <img
+                  src="https://via.placeholder.com/300/000000?text=8"
+                  class="img-fluid mb-2"
+                  alt="black sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="3, 4"
+              data-sort="red sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(352px, 169px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FF0000/FFFFFF.png?text=9"
+                data-toggle="lightbox"
+                data-title="sample 9 - red"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FF0000/FFFFFF?text=9"
+                  class="img-fluid mb-2"
+                  alt="red sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="1"
+              data-sort="white sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(528px, 169px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FFFFFF.png?text=10"
+                data-toggle="lightbox"
+                data-title="sample 10 - white"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FFFFFF?text=10"
+                  class="img-fluid mb-2"
+                  alt="white sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="1"
+              data-sort="white sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(704px, 169px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FFFFFF.png?text=11"
+                data-toggle="lightbox"
+                data-title="sample 11 - white"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FFFFFF?text=11"
+                  class="img-fluid mb-2"
+                  alt="white sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="2, 4"
+              data-sort="black sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(880px, 169px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/000000.png?text=12"
+                data-toggle="lightbox"
+                data-title="sample 12 - black"
+              >
+                <img
+                  src="https://via.placeholder.com/300/000000?text=12"
+                  class="img-fluid mb-2"
+                  alt="black sample"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %} {% for field in form %}
+    <div class="form-group">
+      <label>{{ field.label_tag }}</label>
+      {{ field }} {% for error in field.errors %}
+      <p class="text-danger">{{ error }}</p>
+      {% endfor %}
+    </div>
+    {% endfor %} {{ ambience_formset.as_table }} {{
+    specification_formset.as_table }} {{ technical_formset.as_table }}
+    <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 
-{% endblock %}
+  {% endblock %}
+</div>
