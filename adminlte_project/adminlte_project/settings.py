@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'adminlte',
+    'import_export',
     'product.apps.ProductConfig',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

@@ -68,18 +68,20 @@
     </div>
   </div>
 
+  
   <div class="content">
     <div class="container-fluid">
       <section id="content" class="content">
         <div class="row">
           <div id="content-main" class="col-12">
+            {% comment %} -------- FORM -----------{% endcomment %}
             <form
               enctype="multipart/form-data"
               action=""
               method="post"
               id="product_form"
               novalidate=""
-            >
+              >
               <input
                 type="hidden"
                 name="csrfmiddlewaretoken"
@@ -89,23 +91,12 @@
                 <div class="col-12 col-lg-9">
                   <div class="card">
                     <div class="card-body">
+                      {% comment %} -------- HEAD TABS-----------{% endcomment %}
                       <ul
                         class="nav nav-tabs mb-3"
                         role="tablist"
                         id="jazzy-tabs"
-                      >
-                      <li class="nav-item">
-                        <a
-                          class="nav-link active"
-                          data-toggle="pill"
-                          role="tab"
-                          aria-controls="general-information-tab"
-                          aria-selected="true"
-                          href="#general-information-tab"
                         >
-                          Product
-                        </a>
-                      </li>
                         <li class="nav-item">
                           <a
                             class="nav-link active"
@@ -214,17 +205,21 @@
                             Technical images
                           </a>
                         </li> {% endcomment %}
+                        
                       </ul>
-
+                      {% comment %} -------- /HEAD TABS-----------{% endcomment %}
+                      
+                      {% comment %} -------- CONTENT TABS-----------{% endcomment %}
                       <div class="tab-content">
                         <div
                           id="general-information-tab"
                           class="tab-pane fade active show"
                           role="tabpanel"
                           aria-labelledby="general-information-tab"
-                        >
+                          >
                           <div class="card">
                             <div class="p-5 card-body">
+                              {% comment %} -------- ID----------{% endcomment %}
                               <div class="form-group field-id">
                                 <div class="row">
                                   <label class="col-sm-3 text-left" for="id_id">
@@ -237,7 +232,7 @@
                                   </div>
                                 </div>
                               </div>
-
+                              {% comment %} -------- PREFIX CODE----------{% endcomment %}
                               <div class="form-group field-prefix_code">
                                 <div class="row">
                                   <label
@@ -303,6 +298,7 @@
                                 </div>
                               </div>
 
+                              {% comment %} -------- PIM CODE----------{% endcomment %}
                               <div class="form-group field-pim_code">
                                 <div class="row">
                                   <label
@@ -318,7 +314,7 @@
                                   </div>
                                 </div>
                               </div>
-
+                              {% comment %} -------- SKU ---------{% endcomment %}
                               <div class="form-group field-sku">
                                 <div class="row">
                                   <label
@@ -333,8 +329,8 @@
                                     <input
                                       type="text"
                                       name="sku"
-                                      class="vTextField"
-                                      maxlength="200"
+                                      class="form-control"
+                                      maxlength="100"
                                       required=""
                                       id="id_sku"
                                     />
@@ -345,7 +341,7 @@
                                   </div>
                                 </div>
                               </div>
-
+                              {% comment %} -------- NAME----------{% endcomment %}
                               <div class="form-group field-name">
                                 <div class="row">
                                   <label
@@ -360,8 +356,8 @@
                                     <input
                                       type="text"
                                       name="name"
-                                      class="vTextField"
-                                      maxlength="200"
+                                      class="form-control"
+                                      maxlength="100"
                                       required=""
                                       id="id_name"
                                     />
@@ -995,6 +991,7 @@
                                   <div class="col-sm-7 field-cost_price">
                                     <input
                                       type="number"
+                                      class="form-control"
                                       name="cost_price"
                                       step="0.01"
                                       id="id_cost_price"
@@ -1015,7 +1012,7 @@
                           class="tab-pane fade"
                           role="tabpanel"
                           aria-labelledby="product-specification-tab"
-                        >
+                          >
                           <div class="card">
                             <div class="p-5 card-body">
                               <div class="form-group field-ps_overal_dimension">
@@ -2912,7 +2909,7 @@
                           class="tab-pane fade"
                           role="tabpanel"
                           aria-labelledby="technical-images-tab"
-                        >
+                          >
                           <div
                             class="js-inline-admin-formset inline-group"
                             id="technical_image-group"
@@ -3065,10 +3062,13 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                      {% comment %} -------- /CONTENT TABS-----------{% endcomment %}
+                    </div> 
+                    {% comment %} -------- CARD-BODY-------{% endcomment %}
                   </div>
+                  {% comment %} -------- CARD ----------{% endcomment %}
                 </div>
-
+                {% comment %} -------- SUBMIT ----------{% endcomment %}
                 <div class="col-12 col-lg-3">
                   <div id="jazzy-actions" class="">
                     <div>
@@ -3149,6 +3149,7 @@
                     data-prepopulated-fields="[]"
                   ></script>
                 </div>
+                {% comment %} -------- /SUBMIT ----------{% endcomment %}
               </div>
             </form>
           </div>
@@ -3628,8 +3629,7 @@
       <p class="text-danger">{{ error }}</p>
       {% endfor %}
     </div>
-    {% endfor %} {{ ambience_formset.as_table }} {{
-    specification_formset.as_table }} {{ technical_formset.as_table }}
+    {% endfor %} {{ ambience_formset.as_table }} {{specification_formset.as_table }} {{ technical_formset.as_table }}
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 
