@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Brand, Category, AmbienceImage, SpecificationImage, TechnicalImage
+from .models import Product, Brand, Category, Channel, Unit, Material,\
+                    AmbienceImage,SpecificationImage, TechnicalImage
 import datetime
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
@@ -9,7 +10,9 @@ from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .forms import ProductForm, CategoryForm, BrandForm, AmbienceImageForm, SpecificationImageForm, TechnicalImageForm
+from .forms import ProductForm, CategoryForm, BrandForm, AmbienceImageForm,\
+                    SpecificationImageForm, TechnicalImageForm, ChannelForm,\
+                    UnitForm, MaterialForm
 from django.forms import inlineformset_factory
 from django.urls import reverse
 
@@ -29,6 +32,7 @@ def product_list(request):
 @login_required
 def product_create(request):
     form = ProductForm()
+    # brands = Brand.objects.all()
     ambience_formset = AmbienceImageFormSet(prefix='ambience')
     specification_formset = SpecificationImageFormSet(prefix='specification')
     technical_formset = TechnicalImageFormSet(prefix='technical')
@@ -37,6 +41,7 @@ def product_create(request):
         'ambience_formset': ambience_formset,
         'specification_formset': specification_formset,
         'technical_formset': technical_formset,
+        # 'brands': brands,
         }
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
@@ -47,12 +52,14 @@ def product_create(request):
             try:
                 product = form.save(commit=False)
                 category_list = request.POST.getlist('category')
-                brand = request.POST.get('brand')
+                # brand = request.POST.get('brand')
                 if brand:
                     product.brand, created = Brand.objects.get_or_create(id=brand)
                 cost_price = request.POST.get('cost_price')
                 if cost_price:
                     product.cost_price = cost_price
+                # Generate and store the pim_code for the new product
+                # product.pim_code = product.pim_code
                 product.save()
                 if category_list:   
                     product.category.set(category_list)
@@ -84,6 +91,7 @@ def product_create(request):
 def product_edit(request, id):
     product = get_object_or_404(Product, id=id)
     form = ProductForm(instance=product)
+    # brands = Brand.objects.all()
     ambience_formset = AmbienceImageFormSet(instance=product, prefix='ambience')
     specification_formset = SpecificationImageFormSet(instance=product, prefix='specification')
     technical_formset = TechnicalImageFormSet(instance=product, prefix='technical')
@@ -92,7 +100,8 @@ def product_edit(request, id):
         'ambience_formset': ambience_formset,
         'specification_formset': specification_formset,
         'technical_formset': technical_formset,
-        'id': id
+        'id': id,
+        # 'brands' : brands,
         }
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
@@ -227,6 +236,100 @@ def category_delete(request, id):
     category = get_object_or_404(Category, id=id)
     category.delete()
     return redirect('product:category_list')
+
+# ==========================---CHANNEL---=====================
+def channel_list(request):
+    channels = Channel.objects.all()
+    return render(request, 'product/channel_list.html', {'channels': channels})
+
+def channel_create(request):
+    if request.method == 'POST':
+        form = ChannelForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('product:channel_list')
+    else:
+        form = ChannelForm()
+    return render(request, 'product/channel_create.html', {'form': form})
+
+def channel_edit(request, id):
+    channel = get_object_or_404(Category, id=id)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES, instance=channel)
+        if form.is_valid():
+            form.save()
+            return redirect('product:channel_list')
+    else:
+        form = ChannelForm(instance=channel)
+    return render(request, 'product/channel_edit.html', {'form': form})
+
+def channel_delete(request, id):
+    channel = get_object_or_404(Channel, id=id)
+    channel.delete()
+    return redirect('product:channel_list')
+
+#  ==========================---MATERIAL---=====================
+def material_list(request):
+    materials = Material.objects.all()
+    return render(request, 'product/material_list.html', {'materials': materials})
+
+def material_create(request):
+    if request.method == 'POST':
+        form = MaterialForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('product:material_list')
+    else:
+        form = MaterialForm()
+    return render(request, 'product/material_create.html', {'form': form})
+
+def material_edit(request, id):
+    material = get_object_or_404(Material, id=id)
+    if request.method == 'POST':
+        form = MaterialForm(request.POST, request.FILES, instance=material)
+        if form.is_valid():
+            form.save()
+            return redirect('product:material_list')
+    else:
+        form = MaterialForm(instance=material)
+    return render(request, 'product/material_edit.html', {'form': form})
+
+def material_delete(request, id):
+    material = get_object_or_404(Material, id=id)
+    material.delete()
+    return redirect('product:material_list')
+
+# ==========================---UNIT---=====================
+def unit_list(request):
+    units = Unit.objects.all()
+    return render(request, 'product/unit_list.html', {'units': units})
+
+def unit_create(request):
+    if request.method == 'POST':
+        form = UnitForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('product:unit_list')
+    else:
+        form = UnitForm()
+    return render(request, 'product/unit_create.html', {'form': form})
+
+def unit_edit(request, id):
+    unit = get_object_or_404(Unit, id=id)
+    if request.method == 'POST':
+        form = UnitForm(request.POST, instance=unit)
+        if form.is_valid():
+            form.save()
+            return redirect('product:unit_list')
+    else:
+        form = UnitForm(instance=unit)
+    return render(request, 'product/unit_edit.html', {'form': form})
+
+def unit_delete(request, id):
+    unit = get_object_or_404(Unit, id=id)
+    unit.delete()
+    return redirect('product:unit_list')
+
 
 # ==========================---BRAND---=====================
 def brand_list(request):

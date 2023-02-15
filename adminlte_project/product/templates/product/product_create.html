@@ -82,11 +82,12 @@
               id="product_form"
               novalidate=""
               >
-              <input
+              {% csrf_token %}
+              {% comment %} <input
                 type="hidden"
                 name="csrfmiddlewaretoken"
                 value="7Uskac8jyVuqBoTFbChypsCBl7hOhxTgF4rOMLaDK8xxNztO1lPazIWyCGMBPOrq"
-              />
+              /> {% endcomment %}
               <div class="row">
                 <div class="col-12 col-lg-9">
                   <div class="card">
@@ -226,7 +227,7 @@
                                     ID
                                   </label>
                                   <div class="col-sm-7 field-id">
-                                    <div class="readonly">-</div>
+                                    <div class="readonly">{{ form.id.value }}</div>
                                     <div class="help-block red"></div>
                                     <div class="help-block text-red"></div>
                                   </div>
@@ -250,15 +251,12 @@
                                       aria-hidden="true"
                                     >
                                       <option value="">---------</option>
-                                      <option value="LC">Lounge Chair</option>
-                                      <option value="LS">Love Seat</option>
-                                      <option
-                                        value="NO"
-                                        selected=""
-                                        data-select2-id="select2-data-2-3h7r"
-                                      >
-                                        None
-                                      </option></select
+                                      {% for choice in form.prefix_code.field.choices %}
+                                      <option value="{{ choice.0 }}" {% if choice.0 == form.prefix_code.value %}selected{% endif %}>{{ choice.1 }}</option>
+                                      {% endfor %}
+
+                                      
+                                    </select
                                     ><span
                                       class="select2 select2-container select2-container--default"
                                       dir="ltr"
@@ -297,6 +295,20 @@
                                   </div>
                                 </div>
                               </div>
+                              <div class="form-group field-prefix_code">
+                                <div class="row">
+                                  <label class="col-sm-3 text-left" for="id_prefix_code">Prefix code</label>
+                                  <div class="col-sm-7 field-prefix_code">
+                                    <select name="prefix_code" id="id_prefix_code" class="select2">
+                                      {% for choice in form.prefix_code.field.choices %}
+                                        <option value="{{ choice.0 }}" {% if choice.0 == form.prefix_code.value %}selected{% endif %}>{{ choice.1 }}</option>
+                                      {% endfor %}
+                                    </select>
+                                    <div class="help-block red"></div>
+                                    <div class="help-block text-red"></div>
+                                  </div>
+                                </div>
+                              </div>
 
                               {% comment %} -------- PIM CODE----------{% endcomment %}
                               <div class="form-group field-pim_code">
@@ -308,7 +320,7 @@
                                     Pim code
                                   </label>
                                   <div class="col-sm-7 field-pim_code">
-                                    <div class="readonly">NO-0None</div>
+                                    <div class="readonly">{{ form.pim_code.value }}</div>
                                     <div class="help-block red"></div>
                                     <div class="help-block text-red"></div>
                                   </div>
@@ -322,7 +334,7 @@
                                     for="id_sku"
                                   >
                                     Sku
-
+                            
                                     <span class="text-red">* </span>
                                   </label>
                                   <div class="col-sm-7 field-sku">
@@ -333,6 +345,7 @@
                                       maxlength="100"
                                       required=""
                                       id="id_sku"
+                                      value={{ form.sku.value }}
                                     />
 
                                     <div class="help-block red"></div>
@@ -360,6 +373,7 @@
                                       maxlength="100"
                                       required=""
                                       id="id_name"
+                                      value={{ form.name.value }}
                                     />
 
                                     <div class="help-block red"></div>
@@ -368,116 +382,25 @@
                                   </div>
                                 </div>
                               </div>
-
-                              <div class="form-group field-brand">
-                                <div class="row">
-                                  <label
-                                    class="col-sm-3 text-left"
-                                    for="id_brand"
-                                  >
-                                    Brand
-                                  </label>
+                              {% comment %} -------- BRAND----------{% endcomment %}
+                            <div class="form-group field-brand">
+                              <div class="row">
+                                  <label class="col-sm-3 text-left" for="id_brand">Brand fetch form</label>
                                   <div class="col-sm-7 field-brand">
-                                    <div
-                                      class="related-widget-wrapper"
-                                      data-model-ref="brand"
-                                    >
-                                      <select
-                                        name="brand"
-                                        id="id_brand"
-                                        data-select2-id="select2-data-id_brand"
-                                        tabindex="-1"
-                                        class="select2-hidden-accessible"
-                                        aria-hidden="true"
-                                      >
-                                        <option
-                                          value=""
-                                          selected=""
-                                          data-select2-id="select2-data-4-n8di"
-                                        >
-                                          ---------
-                                        </option>
-
-                                        <option value="2">Kuno</option>
-
-                                        <option value="3">Triconville</option>
-
-                                        <option value="1">Pure</option>
-
-                                        <option value="4">
-                                          Dezign District
-                                        </option></select
-                                      ><span
-                                        class="select2 select2-container select2-container--default"
-                                        dir="ltr"
-                                        data-select2-id="select2-data-3-a45t"
-                                        style="width: 143px"
-                                        ><span class="selection"
-                                          ><span
-                                            class="select2-selection select2-selection--single"
-                                            role="combobox"
-                                            aria-haspopup="true"
-                                            aria-expanded="false"
-                                            tabindex="0"
-                                            aria-disabled="false"
-                                            aria-labelledby="select2-id_brand-container"
-                                            aria-controls="select2-id_brand-container"
-                                            ><span
-                                              class="select2-selection__rendered"
-                                              id="select2-id_brand-container"
-                                              role="textbox"
-                                              aria-readonly="true"
-                                              title="---------"
-                                              >---------</span
-                                            ><span
-                                              class="select2-selection__arrow"
-                                              role="presentation"
-                                              ><b
-                                                role="presentation"
-                                              ></b></span></span></span
-                                        ><span
-                                          class="dropdown-wrapper"
-                                          aria-hidden="true"
-                                        ></span
-                                      ></span>
-
-                                      <a
-                                        class="related-widget-wrapper-link change-related"
-                                        id="change_id_brand"
-                                        data-href-template="/admin/product/brand/__fk__/change/?_to_field=id&amp;_popup=1"
-                                        data-popup="yes"
-                                        title="Change selected brand"
-                                        ><img
-                                          src="/static/admin/img/icon-changelink.svg"
-                                          alt="Change" /></a
-                                      ><a
-                                        class="related-widget-wrapper-link add-related"
-                                        id="add_id_brand"
-                                        data-popup="yes"
-                                        href="/admin/product/brand/add/?_to_field=id&amp;_popup=1"
-                                        title="Add another brand"
-                                        ><img
-                                          src="/static/admin/img/icon-addlink.svg"
-                                          alt="Add" /></a
-                                      ><a
-                                        class="related-widget-wrapper-link view-related"
-                                        id="view_id_brand"
-                                        data-href-template="/admin/product/brand/__fk__/change/?_to_field=id"
-                                        title="View selected brand"
-                                        ><img
-                                          src="/static/admin/img/icon-viewlink.svg"
-                                          alt="View"
-                                      /></a>
-                                    </div>
-
-                                    <div class="help-block red"></div>
-
-                                    <div class="help-block text-red"></div>
+                                      <select name="brand" id="id_brand" class="select2" style="width: 143px">
+                                          {% for value, text in form.brand.field.choices %}
+                                              <option value="{{ value }}" {% if form.brand.value == value %}selected{% endif %}>
+                                                  {{ text }}
+                                              </option>
+                                          {% endfor %}
+                                      </select>
                                   </div>
-                                </div>
                               </div>
+                          </div>
+                          {% comment %} -------- /BRAND----------{% endcomment %}
 
-                              <div class="form-group field-status">
+                          {% comment %} -------- STATUS----------{% endcomment %}
+                              {% comment %} <div class="form-group field-status">
                                 <div class="row">
                                   <label
                                     class="col-sm-3 text-left"
@@ -496,16 +419,11 @@
                                       class="select2-hidden-accessible"
                                       aria-hidden="true"
                                     >
-                                      <option value="DI">Disable</option>
-
-                                      <option
-                                        value="EN"
-                                        selected=""
-                                        data-select2-id="select2-data-6-cx4f"
-                                      >
-                                        Enable
-                                      </option></select
-                                    ><span
+                                    {% for choice in form.status.field.choices %}
+                                      <option value="{{ choice.0 }}" {% if choice.0 == form.status.value %}selected{% endif %}>{{ choice.1 }}</option>
+                                    {% endfor %}
+                                  </select>
+                                    <span
                                       class="select2 select2-container select2-container--default"
                                       dir="ltr"
                                       data-select2-id="select2-data-5-cnxn"
@@ -544,7 +462,26 @@
                                     <div class="help-block text-red"></div>
                                   </div>
                                 </div>
+                              </div> {% endcomment %}
+
+                              <div class="form-group field-status">
+                                <div class="row">
+                                  <label class="col-sm-3 text-left" for="id_status">Status new<span class="text-red">* </span></label>
+                                  <div class="col-sm-7 field-status">
+                                    <select name="status" id="id_status" class="select2" style="width: 143px">
+                                      {% for value, label in form.status.field.choices %}
+                                        <option value="{{ value }}" {% if form.status.value == value %}selected{% endif %}>
+                                          {{ label }}
+                                        </option>
+                                      {% endfor %}
+                                    </select>
+                                  </div>
+                                </div>
                               </div>
+                              
+                              
+                              
+                              
 
                               <div class="form-group field-featured_image">
                                 <div class="row">
@@ -3625,6 +3562,7 @@
     {% csrf_token %} {% for field in form %}
     <div class="form-group">
       <label>{{ field.label_tag }}</label>
+      
       {{ field }} {% for error in field.errors %}
       <p class="text-danger">{{ error }}</p>
       {% endfor %}

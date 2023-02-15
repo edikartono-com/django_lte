@@ -1,15 +1,19 @@
 from django import forms
-from .models import Product, Unit,Channel,Category, Brand, AmbienceImage, SpecificationImage, TechnicalImage, Material
+from .models import Product, Unit, Channel, Category, \
+                    Brand, AmbienceImage, SpecificationImage, \
+                    TechnicalImage, Material
 from django.core.exceptions import ValidationError
 
 class ProductForm(forms.ModelForm):
+    id = forms.IntegerField(widget=forms.TextInput(attrs={'readonly':'readonly'}))
     pim_code = forms.CharField(label='PIM Code', required=False, widget=forms.TextInput(attrs={'readonly':'readonly'}))
-    
+    # status = forms.ChoiceField(choices=Product.Status.choices, widget=forms.Select(attrs={'class': 'select2'}))
     class Meta:
         model = Product
+        exclude = []
         fields = [
             # General Information ---------------------
-            'id', 'prefix_code','sku', 'pim_code', 'sku', 'name', 'brand', 'status',
+            'id','prefix_code','sku', 'pim_code', 'sku', 'name', 'brand', 'status',
             'featured_image', 'material', 'unit', 'channel', 'category', 'cost_price',
             'category', 'brand', 'bom_file', 'cost_price', 'status',
             # Product Specification ---------------------
@@ -24,14 +28,16 @@ class ProductForm(forms.ModelForm):
             # Dezign Studio -------------------------------------------
             'drawing_3d_dwg','drawing_3d_obj','drawing_3d_3dmax','drawing_3d_sketchup',
             # SEO
-            'seo_meta_title','seo_meta_description','seo_meta_keyword','seo_content_overview'
-
+            'seo_meta_title','seo_meta_description','seo_meta_keyword','seo_content_overview',
+            
             ]
     
         
         widgets = {
             # 'category': forms.CheckboxSelectMultiple,
             'featured_image': forms.ClearableFileInput(attrs={'multiple': True}),
+            # 'id': forms.TextInput(attrs={'readonly': 'readonly'}),
+            # 'id': forms.HiddenInput(),
         }
 
     def clean_sku(self):
@@ -55,9 +61,24 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ['name', 'description', 'picture']
 
+class ChannelForm(forms.ModelForm):
+    class Meta:
+        model = Channel
+        fields = ['name', 'description','picture']
+
+class MaterialForm(forms.ModelForm):
+    class Meta:
+        model = Material
+        fields = ['name']
+
 class BrandForm(forms.ModelForm):
     class Meta:
         model = Brand
+        fields = ['name']
+
+class UnitForm(forms.ModelForm):
+    class Meta:
+        model = Unit
         fields = ['name']
 
 class AmbienceImageForm(forms.ModelForm):
@@ -74,3 +95,4 @@ class TechnicalImageForm(forms.ModelForm):
     class Meta:
         model = TechnicalImage
         fields = ['product', 'image']
+

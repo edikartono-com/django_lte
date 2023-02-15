@@ -1,0 +1,30 @@
+{% extends "adminlte/base.html" %}
+{% load static %}
+{% block body %}
+
+{% block content %}
+  <h1>Material List</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for material in materials %}
+        <tr>
+          <td>{{ material.id }}</td>
+          <td>{{ material.name }}</td>
+          <td>
+            <a href="{% url 'product:material_edit' material.id %}">Edit</a>
+            <a href="{% url 'product:material_delete' material.id %}" onclick="return confirm('Are you sure?')">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'product:material_create' %}">Create material</a>
+{% endblock %}
+
+{% endblock %}

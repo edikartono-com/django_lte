@@ -1,0 +1,31 @@
+{% extends "adminlte/base.html" %}
+{% load static %}
+{% block body %}
+
+{% block content %}
+
+<h1>Unit List</h1>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+  </tr>
+</thead>
+<tbody>
+  {% for unit in units %}
+  <tr>
+    <td>{{ unit.id }}</td>
+    <td>{{ unit.name }}</td>
+    <td>
+      <a href="{% url 'product:unit_edit' unit.id %}">Edit</a>
+      <a href="{% url 'product:unit_delete' unit.id %}" onclick="return confirm('Are you sure?');">Delete</a>
+    </td>
+  </tr>
+  <tbody>
+  {% endfor %}
+</table>
+<a href="{% url 'product:unit_create' %}">Create</a>
+
+{% endblock %}
+{% endblock %}

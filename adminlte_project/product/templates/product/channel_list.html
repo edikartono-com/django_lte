@@ -1,0 +1,40 @@
+{% extends "adminlte/base.html" %}
+{% load static %}
+{% block body %}
+
+{% block content %}
+  <h1>channel List</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Picture</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for channel in channels %}
+        <tr>
+          <td>{{ channel.id }}</td>
+          <td>{{ channel.name }}</td>
+          <td>{{ channel.description }}</td>
+          {% if channel.picture %}
+            <td><img src="{{ channel.picture.url }}" height="50"></td>
+          {% else %}
+            <td>No picture</td>
+          {% endif %}
+          <!-- <td>{% if channel.picture %}<img src="{{ channel.picture.url }}" width="100" >{% endif %}</td> -->
+          <td>
+            <a href="{% url 'product:channel_edit' channel.id %}">Edit</a>
+            <a href="{% url 'product:channel_delete' channel.id %}" onclick="return confirm('Are you sure?')">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'product:channel_create' %}">Create channel</a>
+{% endblock %}
+
+{% endblock %}
