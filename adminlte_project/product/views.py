@@ -51,20 +51,20 @@ def product_create(request):
         if form.is_valid() and ambience_formset.is_valid() and specification_formset.is_valid() and technical_formset.is_valid():
             try:
                 product = form.save(commit=False)
-                category_list = request.POST.getlist('category')
+                # category_list = request.POST.getlist('category')
                 # brand = request.POST.get('brand')
-                if brand:
-                    product.brand, created = Brand.objects.get_or_create(id=brand)
-                cost_price = request.POST.get('cost_price')
-                if cost_price:
-                    product.cost_price = cost_price
+                # if brand:
+                #     product.brand, created = Brand.objects.get_or_create(id=brand)
+                # cost_price = request.POST.get('cost_price')
+                # if cost_price:
+                #     product.cost_price = cost_price
                 # Generate and store the pim_code for the new product
                 # product.pim_code = product.pim_code
                 product.save()
-                if category_list:   
-                    product.category.set(category_list)
-                else:
-                    product.category.clear()
+                # if category_list:   
+                #     product.category.set(category_list)
+                # else:
+                #     product.category.clear()
                 form.save_m2m()
                 ambience_formset.instance = product
                 ambience_formset.save()

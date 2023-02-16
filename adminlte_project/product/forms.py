@@ -5,7 +5,7 @@ from .models import Product, Unit, Channel, Category, \
 from django.core.exceptions import ValidationError
 
 class ProductForm(forms.ModelForm):
-    id = forms.IntegerField(widget=forms.TextInput(attrs={'readonly':'readonly'}))
+    # id = forms.IntegerField(widget=forms.TextInput(attrs={'readonly':'readonly'}))
     pim_code = forms.CharField(label='PIM Code', required=False, widget=forms.TextInput(attrs={'readonly':'readonly'}))
     # status = forms.ChoiceField(choices=Product.Status.choices, widget=forms.Select(attrs={'class': 'select2'}))
     class Meta:
@@ -13,7 +13,7 @@ class ProductForm(forms.ModelForm):
         exclude = []
         fields = [
             # General Information ---------------------
-            'id','prefix_code','sku', 'pim_code', 'sku', 'name', 'brand', 'status',
+            'id','prefix_code','sku', 'pim_code', 'name', 'brand', 'status',
             'featured_image', 'material', 'unit', 'channel', 'category', 'cost_price',
             'category', 'brand', 'bom_file', 'cost_price', 'status',
             # Product Specification ---------------------
