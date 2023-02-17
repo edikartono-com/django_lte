@@ -436,11 +436,11 @@
 <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <!-- ChartJS -->
 <script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
-<!-- Sparkline -->
-<script src="{% static 'plugins/sparklines/sparkline.js' %}"></script>
-<!-- JQVMap -->
+{% comment %} <!-- Sparkline -->
+<script src="{% static 'plugins/sparklines/sparkline.js' %}"></script> {% endcomment %}
+{% comment %} <!-- JQVMap -->
 <script src="{% static 'plugins/jqvmap/jquery.vmap.min.js' %}"></script>
-<script src="{% static 'plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
+<script src="{% static 'plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script> {% endcomment %}
 <!-- jQuery Knob Chart -->
 <script src="{% static 'plugins/jquery-knob/jquery.knob.min.js' %}"></script>
 <!-- daterangepicker -->
@@ -454,8 +454,8 @@
 <script src="{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
 
 
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{% static 'dist/js/pages/dashboard.js' %}"></script>
+{% comment %} <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{% static 'dist/js/pages/dashboard.js' %}"></script> {% endcomment %}
 
 <!-- filter/search/sort table-->
 <script src="{% static 'plugins/select2/js/select2.full.min.js' %}"></script>
@@ -681,6 +681,7 @@
 <!-- =============  /MODAL, ALERT, TOAST =============-->
 
 <!-- =============  FORM  =============-->
+{% comment %} <script src="{% static 'plugins/change-form/Change_form.js' %}"></script> {% endcomment %}
 <!-- Select2 -->
 <script src="{% static 'plugins/select2/js/select2.full.min.js' %}"></script>
 <!-- Bootstrap4 Duallistbox -->
@@ -698,10 +699,10 @@
 <script src="{% static 'plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}"></script>
 <!-- BS-Stepper -->
 <script src="{% static 'plugins/bs-stepper/js/bs-stepper.min.js' %}"></script>
-<!-- dropzonejs -->
-<script src="{% static 'plugins/dropzone/min/dropzone.min.js' %}"></script>
+{% comment %} <!-- dropzonejs -->
+<script src="{% static 'plugins/dropzone/min/dropzone.min.js' %}"></script> {% endcomment %}
 <!-- form-advanced.html js file -->
-<script>
+{% comment %} <script>
   $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
@@ -776,11 +777,11 @@
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
 
-  })
-  // BS-Stepper Init
+  }) {% endcomment %}
+  {% comment %} // BS-Stepper Init
   document.addEventListener('DOMContentLoaded', function () {
     window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-  })
+  }) {% endcomment %}
 
   {% comment %} // DropzoneJS Demo Code Start
   Dropzone.autoDiscover = false
@@ -834,7 +835,7 @@
     myDropzone.removeAllFiles(true)
   }
   // DropzoneJS Demo Code End {% endcomment %}
-</script>
+{% comment %} </script> {% endcomment %}
 <!-- =============  /FORM  =============-->
 
 
@@ -842,5 +843,9 @@
 <script src="{% static 'dist/js/adminlte.js' %}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{% static 'dist/js/demo.js' %}"></script>
+
+
+
+
 </body>
 </html>

@@ -1,0 +1,32 @@
+{% extends "adminlte/base.html" %} {% load static %} {% block body %}
+
+
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %} {% for field in form %}
+    <div class="form-group">
+      <label>{{ field.label_tag }}</label>
+      
+      {{ field }} {% for error in field.errors %}
+      <p class="text-danger">{{ error }}</p>
+      {% endfor %}
+    </div>
+    {% endfor %} {{ ambience_formset.as_table }} {{specification_formset.as_table }} {{ technical_formset.as_table }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+
+  <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+/>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  {% endblock %}
+</div>

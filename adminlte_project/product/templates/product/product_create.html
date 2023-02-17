@@ -1,147 +1,818 @@
-{% extends "adminlte/base.html" %}
-{% load static %}
-{% block body %}
+{% extends "adminlte/base.html" %} {% load static %} {% block body %}
 
-{% block content %}
-
-<form method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  <div class="card">
-      <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs" id="product-tabs" role="tablist">
-              <li class="nav-item">
-                  <a class="nav-link active" id="general-info-tab" data-toggle="tab" href="#general-info" role="tab" aria-controls="general-info" aria-selected="true">General Information</a>
-              </li>
-              <!-- <li class="nav-item">
-                  <a class="nav-link" id="product-specs-tab" data-toggle="tab" href="#product-specs" role="tab" aria-controls="product-specs" aria-selected="false">Product Specification</a>
-              </li> -->
-          </ul>
-      </div>
-      <div class="card-body">
-          <div class="tab-content" id="product-tabs-content">
-              <div class="tab-pane fade show active" id="general-info" role="tabpanel" aria-labelledby="general-info-tab">
-                  {% for field in form %}
-                  <div class="form-group">
-                      <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-                      {{ field }}
-                      {% for error in field.errors %}
-                          <p class="text-danger">{{ error }}</p>
-                      {% endfor %}
-                  </div>
-                  {% endfor %}
-                  <!-- Add other fields from the General Information tab -->
-              </div>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <p class="lead">Products / Vento-01-AL</p>
+        <h3>Vento Single Seater</h3>
+        <div class="d-flex">
+          <p class="text-dark mr-4">
+            Overall Completness : <span class="text-success">> 50%</span>
+          </p>
+          <div class="form-group">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="customSwitch1"
+              />
+              <label class="custom-control-label" for="customSwitch1"
+                >Draft</label
+              >
+            </div>
           </div>
-      </div>
-  </div>
-  <div class="form-group">
-      <button type="submit" class="btn btn-primary">Create Product</button>
-  </div>
-</form>
-
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="card">
-      <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs" id="product-tabs" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="general-info-tab" data-toggle="tab" href="#general-info" role="tab" aria-controls="general-info" aria-selected="true">General Information</a>
-          </li>
-          {% comment %} <li class="nav-item">
-            <a class="nav-link" id="product-specs-tab" data-toggle="tab" href="#product-specs" role="tab" aria-controls="product-specs" aria-selected="false">Product Specification</a>
-          </li> {% endcomment %}
-        </ul>
-      </div>
-      <div class="card-body">
-        <div class="tab-content" id="product-tabs-content">
-          <div class="tab-pane fade show active" id="general-info" role="tabpanel" aria-labelledby="general-info-tab">
-              {% for field in form %}
-                <div class="form-group">
-                    <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-                    {{ field }}
-                    {% for error in field.errors %}
-                        <p class="text-danger">{{ error }}</p>
-                    {% endfor %}
+        </div>
+        <div class="progress">
+          <div
+            class="progress-bar bg-primary progress-bar-striped"
+            role="progressbar"
+            aria-valuenow="50"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            style="width: 50%"
+          >
+            <span class="sr-only">50% Complete (success)</span>
+          </div>
+        </div>
+        <div class="col"></div>
+        <div class="col">
+          {% comment %}
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <h5 class="card-title">Column 2</h5>
+                  <p class="card-text">Some text in column 2</p>
                 </div>
-            {% endfor %}
+                <div class="col text-center">
+                  <input
+                    type="text"
+                    class="knob"
+                    value="40"
+                    data-skin="tron"
+                    data-thickness="0.2"
+                    data-width="90"
+                    data-height="90"
+                    data-fgColor="red"
+                    data-readonly="true"
+                  />
+                  <div class="knob-label">Completness</div>
+                </div>
+              </div>
+            </div>
           </div>
-            
-            <!-- Add other fields from the General Information tab -->
-          
-          {% comment %} <button type="submit" class="btn btn-primary">Create Product</button> {% endcomment %}
-          {% comment %} <button type="submit" class="btn btn-primary">Save</button> {% endcomment %}
-          {% comment %} <div class="tab-pane fade" id="product-specs" role="tabpanel" aria-labelledby="product-specs-tab">
-            <div class="form-group">
-              {{ form.ps_overal_dimension.label_tag }}
-              {{ form.ps_overal_dimension }}
+          {% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="content">
+    <div class="container-fluid">
+      <section id="content" class="content">
+        <div class="row">
+          <div id="content-main" class="col-12">
+            {% comment %} -------- FORM -----------{% endcomment %}
+            <form
+              enctype="multipart/form-data"
+              action=""
+              method="post"
+              id="product_form"
+              novalidate=""
+              >
+              {% csrf_token %}
+              {% comment %} <input
+                type="hidden"
+                name="csrfmiddlewaretoken"
+                value="7Uskac8jyVuqBoTFbChypsCBl7hOhxTgF4rOMLaDK8xxNztO1lPazIWyCGMBPOrq"
+              /> {% endcomment %}
+              <div class="row">
+                <div class="col-12 col-lg-9">
+                  {% comment %} <div class="card"> {% endcomment %}
+                    {% comment %} <div class="card-body"> {% endcomment %}
+                      {% comment %} -------- HEAD TABS-----------{% endcomment %}
+                      
+
+                      {% comment %} -------- CONTENT TABS-----------{% endcomment %}
+                      
+                      {% comment %} Card Form {% endcomment %}
+                      {% comment %} <div class="card-body">
+                        <div class="form-group row">
+                          <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                          <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                          <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <div class="offset-sm-2 col-sm-10">
+                            <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="exampleCheck2">
+                              <label class="form-check-label" for="exampleCheck2">Remember me</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div> {% endcomment %}
+                      
+                    {% comment %} </div>  {% endcomment %}
+                    {% comment %} -------- CARD-BODY-------{% endcomment %}
+                    <div class="card card-default">
+                      <div class="card-header">
+                      <h3 class="card-title">Select2 (Default Theme)</h3>
+                      <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                      </button>
+                      </div>
+                      </div>
+                      
+                      <div class="card-body">
+                      <div class="row">
+                      <div class="col-md-6">
+                      <div class="form-group">
+                      <label>Minimal</label>
+                      <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                      <option selected="selected" data-select2-id="3">Alabama</option>
+                      <option>Alaska</option>
+                      <option>California</option>
+                      <option>Delaware</option>
+                      <option>Tennessee</option>
+                      <option>Texas</option>
+                      <option>Washington</option>
+                      </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-rchb-container"><span class="select2-selection__rendered" id="select2-rchb-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                      </div>
+                      
+                      <div class="form-group">
+                      <label>Disabled</label>
+                      <select class="form-control select2 select2-hidden-accessible" disabled="" style="width: 100%;" data-select2-id="4" tabindex="-1" aria-hidden="true">
+                      <option selected="selected" data-select2-id="6">Alabama</option>
+                      <option>Alaska</option>
+                      <option>California</option>
+                      <option>Delaware</option>
+                      <option>Tennessee</option>
+                      <option>Texas</option>
+                      <option>Washington</option>
+                      </select><span class="select2 select2-container select2-container--default select2-container--disabled" dir="ltr" data-select2-id="5" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="true" aria-labelledby="select2-32nu-container"><span class="select2-selection__rendered" id="select2-32nu-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                      </div>
+                      
+                      </div>
+                      
+                      <div class="col-md-6">
+                      <div class="form-group">
+                      <label>Multiple</label>
+                      <select class="select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 70%;" data-select2-id="7" tabindex="-1" aria-hidden="true" >
+                      <option>Alabama</option>
+                      <option>Alaska</option>
+                      <option>California</option>
+                      <option>Delaware</option>
+                      <option>Tennessee</option>
+                      <option>Texas</option>
+                      <option>Washington</option>
+                      </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Select a State" style="width: 366.5px;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                       </div>
+                      
+                      <div class="form-group">
+                      <label>Disabled Result</label>
+                      <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="9" tabindex="-1" aria-hidden="true">
+                      <option selected="selected" data-select2-id="11">Alabama</option>
+                      <option>Alaska</option>
+                      <option disabled="disabled">California (disabled)</option>
+                      <option>Delaware</option>
+                      <option>Tennessee</option>
+                      <option>Texas</option>
+                      <option>Washington</option>
+                      </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="10" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-3hry-container"><span class="select2-selection__rendered" id="select2-3hry-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                      </div>
+                      
+                      </div>
+                      
+                      </div>
+                      
+                      <h5>Custom Color Variants</h5>
+                      <div class="row">
+                      <div class="col-12 col-sm-6">
+                      <div class="form-group">
+                      <label>Minimal (.select2-danger)</label>
+                      <select class="form-control select2 select2-danger select2-hidden-accessible" data-dropdown-css-class="select2-danger" style="width: 100%;" data-select2-id="12" tabindex="-1" aria-hidden="true">
+                      <option selected="selected" data-select2-id="14">Alabama</option>
+                      <option>Alaska</option>
+                      <option>California</option>
+                      <option>Delaware</option>
+                      <option>Tennessee</option>
+                      <option>Texas</option>
+                      <option>Washington</option>
+                      </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="13" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-z84g-container"><span class="select2-selection__rendered" id="select2-z84g-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                      </div>
+                      
+                      </div>
+                      
+                      <div class="col-12 col-sm-6">
+                      <div class="form-group">
+                      <label>Multiple (.select2-purple)</label>
+                      <div class="select2-purple">
+                      <select class="select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;" data-select2-id="15" tabindex="-1" aria-hidden="true">
+                      <option>Alabama</option>
+                      <option>Alaska</option>
+                      <option>California</option>
+                      <option>Delaware</option>
+                      <option>Tennessee</option>
+                      <option>Texas</option>
+                      <option>Washington</option>
+                      </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="16" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Select a State" style="width: 366.5px;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                      </div>
+                      </div>
+                      
+                      </div>
+                      
+                      </div>
+                      
+                      </div>
+                      
+                      <div class="card-footer">
+                      Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
+                      the plugin.
+                      </div>
+                      </div>
+                  {% comment %} </div> {% endcomment %}
+                  {% comment %} -------- CARD ----------{% endcomment %}
+                </div>
+                {% comment %} -------- SUBMIT ----------{% endcomment %}
+                <div class="col-12 col-lg-3">
+                  <div id="jazzy-actions" class="">
+                    <div>
+                      <div class="form-group">
+                        <input
+                          type="submit"
+                          value="Save"
+                          class="btn btn-success form-control"
+                          name="_save"
+                        />
+                      </div>
+
+                      <div class="form-group">
+                        <input
+                          type="submit"
+                          class="btn btn-info form-control"
+                          value="Save and add another"
+                          name="_addanother"
+                        />
+                      </div>
+
+                      <div class="form-group">
+                        <input
+                          type="submit"
+                          class="btn btn-info form-control"
+                          value="Save and continue editing"
+                          name="_continue"
+                        />
+                      </div>
+
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <h5 class="card-title">
+                                <u>General Information</u>
+                              </h5>
+                              <br />
+                              <p class="text-dark mr-4">
+                                Complete Fields:
+                                <span class="text-success">80%</span>
+                              </p>
+                              <p class="text-dark mr-4">
+                                Missing Fields:
+                                <span class="text-danger">20%</span>
+                              </p>
+                            </div>
+                            <div class="col text-center">
+                              <input
+                                type="text"
+                                class="knob"
+                                value="80"
+                                data-skin="tron"
+                                data-thickness="0.2"
+                                data-width="90"
+                                data-height="90"
+                                data-fgColor="#3c8dbc"
+                                data-readonly="true"
+                              />
+                              <div class="knob-label">80% Completness</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <script
+                    type="text/javascript"
+                    id="django-admin-form-add-constants"
+                    src="/static/admin/js/change_form.js"
+                    data-model-name="product"
+                  ></script>
+
+                  <script
+                    id="django-admin-prepopulated-fields-constants"
+                    src="/static/admin/js/prepopulate_init.js"
+                    data-prepopulated-fields="[]"
+                  ></script>
+                </div>
+                {% comment %} -------- /SUBMIT ----------{% endcomment %}
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  {% comment %} -------- gallery ----------{% endcomment %}
+
+  {% comment %} <div class="row">
+    <div class="col-md-12">
+      <div class="card card-default">
+        <div class="card-header">
+          <h3 class="card-title">
+            Ambience Image <small><em>jQuery File Upload</em> like look</small>
+          </h3>
+        </div>
+        <div class="card-body">
+          <div id="actions" class="row">
+            <div class="col-lg-6">
+              <div class="btn-group w-100">
+                <span class="btn btn-success col fileinput-button dz-clickable">
+                  <i class="fas fa-plus"></i>
+                  <span>Add files</span>
+                </span>
+                <button type="submit" class="btn btn-primary col start">
+                  <i class="fas fa-upload"></i>
+                  <span>Start upload</span>
+                </button>
+                <button type="reset" class="btn btn-warning col cancel">
+                  <i class="fas fa-times-circle"></i>
+                  <span>Cancel upload</span>
+                </button>
+              </div>
             </div>
-            <div class="form-group">
-              {{ form.ps_arm_height.label_tag }}
-              {{ form.ps_arm_height }}
+            <div class="col-lg-6 d-flex align-items-center">
+              <div class="fileupload-process w-100">
+                <div
+                  id="total-progress"
+                  class="progress progress-striped active"
+                  role="progressbar"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="0"
+                >
+                  <div
+                    class="progress-bar progress-bar-success"
+                    style="width: 0%"
+                    data-dz-uploadprogress=""
+                  ></div>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              {{ form.ps_seat_height.label_tag }}
-              {{ form.ps_seat_height }}
-            </div> {% endcomment %}
-            <!-- Add other fields from the Product Specification tab -->
+          </div>
+          <div class="table table-striped files" id="previews"></div>
+        </div>
+
+        <div class="card-footer">
+          Visit
+          <a href="https://www.dropzonejs.com">dropzone.js documentation</a> for
+          more examples and information about the plugin.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h4 class="card-title">Ambience Image Gallery</h4>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="btn-group w-100 mb-2">
+            <a
+              class="btn btn-info active"
+              href="javascript:void(0)"
+              data-filter="all"
+            >
+              All items
+            </a>
+            <a class="btn btn-info" href="javascript:void(0)" data-filter="1">
+              Category 1 (WHITE)
+            </a>
+            <a class="btn btn-info" href="javascript:void(0)" data-filter="2">
+              Category 2 (BLACK)
+            </a>
+            <a class="btn btn-info" href="javascript:void(0)" data-filter="3">
+              Category 3 (COLORED)
+            </a>
+            <a class="btn btn-info" href="javascript:void(0)" data-filter="4">
+              Category 4 (COLORED, BLACK)
+            </a>
+          </div>
+          <div class="mb-2">
+            <a
+              class="btn btn-secondary"
+              href="javascript:void(0)"
+              data-shuffle=""
+            >
+              Shuffle items
+            </a>
+            <div class="float-right">
+              <select
+                class="custom-select"
+                style="width: auto"
+                data-sortorder=""
+              >
+                <option value="index">Sort by Position</option>
+                <option value="sortData">Sort by Custom Data</option>
+              </select>
+              <div class="btn-group">
+                <a
+                  class="btn btn-default"
+                  href="javascript:void(0)"
+                  data-sortasc=""
+                >
+                  Ascending
+                </a>
+                <a
+                  class="btn btn-default"
+                  href="javascript:void(0)"
+                  data-sortdesc=""
+                >
+                  Descending
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            class="filter-container p-0 row"
+            style="
+              padding: 3px;
+              position: relative;
+              width: 100%;
+              display: flex;
+              flex-wrap: wrap;
+              height: 341px;
+            "
+          >
+            <div
+              class="filtr-item col-sm-2"
+              data-category="1"
+              data-sort="white sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(0px, 0px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FFFFFF.png?text=1"
+                data-toggle="lightbox"
+                data-title="sample 1 - white"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FFFFFF?text=1"
+                  class="img-fluid mb-2"
+                  alt="white sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="2, 4"
+              data-sort="black sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(176px, 0px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/000000.png?text=2"
+                data-toggle="lightbox"
+                data-title="sample 2 - black"
+              >
+                <img
+                  src="https://via.placeholder.com/300/000000?text=2"
+                  class="img-fluid mb-2"
+                  alt="black sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="3, 4"
+              data-sort="red sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(352px, 0px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FF0000/FFFFFF.png?text=3"
+                data-toggle="lightbox"
+                data-title="sample 3 - red"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FF0000/FFFFFF?text=3"
+                  class="img-fluid mb-2"
+                  alt="red sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="3, 4"
+              data-sort="red sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(528px, 0px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FF0000/FFFFFF.png?text=4"
+                data-toggle="lightbox"
+                data-title="sample 4 - red"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FF0000/FFFFFF?text=4"
+                  class="img-fluid mb-2"
+                  alt="red sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="2, 4"
+              data-sort="black sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(704px, 0px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/000000.png?text=5"
+                data-toggle="lightbox"
+                data-title="sample 5 - black"
+              >
+                <img
+                  src="https://via.placeholder.com/300/000000?text=5"
+                  class="img-fluid mb-2"
+                  alt="black sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="1"
+              data-sort="white sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(880px, 0px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FFFFFF.png?text=6"
+                data-toggle="lightbox"
+                data-title="sample 6 - white"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FFFFFF?text=6"
+                  class="img-fluid mb-2"
+                  alt="white sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="1"
+              data-sort="white sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(0px, 169px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FFFFFF.png?text=7"
+                data-toggle="lightbox"
+                data-title="sample 7 - white"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FFFFFF?text=7"
+                  class="img-fluid mb-2"
+                  alt="white sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="2, 4"
+              data-sort="black sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(176px, 169px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/000000.png?text=8"
+                data-toggle="lightbox"
+                data-title="sample 8 - black"
+              >
+                <img
+                  src="https://via.placeholder.com/300/000000?text=8"
+                  class="img-fluid mb-2"
+                  alt="black sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="3, 4"
+              data-sort="red sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(352px, 169px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FF0000/FFFFFF.png?text=9"
+                data-toggle="lightbox"
+                data-title="sample 9 - red"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FF0000/FFFFFF?text=9"
+                  class="img-fluid mb-2"
+                  alt="red sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="1"
+              data-sort="white sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(528px, 169px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FFFFFF.png?text=10"
+                data-toggle="lightbox"
+                data-title="sample 10 - white"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FFFFFF?text=10"
+                  class="img-fluid mb-2"
+                  alt="white sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="1"
+              data-sort="white sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(704px, 169px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/FFFFFF.png?text=11"
+                data-toggle="lightbox"
+                data-title="sample 11 - white"
+              >
+                <img
+                  src="https://via.placeholder.com/300/FFFFFF?text=11"
+                  class="img-fluid mb-2"
+                  alt="white sample"
+                />
+              </a>
+            </div>
+            <div
+              class="filtr-item col-sm-2"
+              data-category="2, 4"
+              data-sort="black sample"
+              style="
+                opacity: 1;
+                transform: scale(1) translate3d(880px, 169px, 0px);
+                backface-visibility: hidden;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                position: absolute;
+                width: 173.4px;
+                transition: all 0.5s ease-out 0ms, width 1ms ease 0s;
+              "
+            >
+              <a
+                href="https://via.placeholder.com/1200/000000.png?text=12"
+                data-toggle="lightbox"
+                data-title="sample 12 - black"
+              >
+                <img
+                  src="https://via.placeholder.com/300/000000?text=12"
+                  class="img-fluid mb-2"
+                  alt="black sample"
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
+  </div> {% endcomment %}
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %} {% for field in form %}
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Save</button>
+      <label>{{ field.label_tag }}</label>
+      
+      {{ field }} {% for error in field.errors %}
+      <p class="text-danger">{{ error }}</p>
+      {% endfor %}
     </div>
+    {% endfor %} {{ ambience_formset.as_table }} {{specification_formset.as_table }} {{ technical_formset.as_table }}
+    <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 
-
-
-
-
-
-  <div class="container">
-    <h1>Create Product</h1>
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {% for field in form %}
-        <div class="form-group">
-          <label>{{ field.label_tag }}</label>
-          {{ field }}
-          {% for error in field.errors %}
-            <p class="text-danger">{{ error }}</p>
-          {% endfor %}
-        </div>
-      {% endfor %}
-
-      {{ ambience_formset.management_form }}
-      {{ specification_formset.management_form }}
-      {{ technical_formset.management_form }}
-
-      <div class="form-group">
-        <label>Ambience Images</label>
-        {% for form in ambience_formset %}
-          {{ form.as_p }}
-        {% endfor %}
-      </div>
-
-      <div class="form-group">
-        <label>Specification Images</label>
-        {% for form in specification_formset %}
-          {{ form.as_p }}
-        {% endfor %}
-      </div>
-
-      <div class="form-group">
-        <label>Technical Images</label>
-        {% for form in technical_formset %}
-          {{ form.as_p }}
-        {% endfor %}
-      </div>
-
-      <button type="submit" class="btn btn-primary">Create Product</button>
-    </form>
-  </div>
-{% endblock %}
-
-{% endblock %}
+  {% endblock %}
+</div>

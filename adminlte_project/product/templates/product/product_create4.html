@@ -1,0 +1,144 @@
+{% extends "adminlte/base.html" %}
+{% load static %}  
+
+{% comment %} {% block js %} 
+{{
+block.super }}
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script> {% endcomment %}
+
+
+{% block body %} {% block content %}
+
+
+
+
+<div class="container mt-4">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-lg-8">
+        <h2 class="mb-4">Product Information</h2>
+        <div class="form-group">
+          {{ form.sku.label_tag }}
+          {{ form.sku }}
+        </div>
+        <div class="form-group">
+          {{ form.name.label_tag }}
+          {{ form.name }}
+        </div>
+        <div class="form-group">
+          {{ form.brand.label_tag }}
+          {{ form.brand }}
+        </div>
+        <div class="form-group">
+          {{ form.category.label_tag }}
+          {{ form.category }}
+        </div>
+        <div class="form-group">
+          {{ form.cost_price.label_tag }}
+          {{ form.cost_price }}
+        </div>
+        <div class="form-group">
+          {{ form.ps_overal_dimension.label_tag }}
+          {{ form.ps_overal_dimension }}
+        </div>
+        <div class="form-group">
+          {{ form.ps_seat_height.label_tag }}
+          {{ form.ps_seat_height }}
+        </div>
+        <div class="form-group">
+          {{ form.ps_seat_depth.label_tag }}
+          {{ form.ps_seat_depth }}
+        </div>
+        <div class="form-group">
+          {{ form.ps_nett_weight.label_tag }}
+          {{ form.ps_nett_weight }}
+        </div>
+        <div class="form-group">
+          {{ form.ps_gross_weight.label_tag }}
+          {{ form.ps_gross_weight }}
+        </div>
+        <div class="form-group">
+          {{ form.ps_box_weight.label_tag }}
+          {{ form.ps_box_weight }}
+        </div>
+        <div class="form-group">
+          {{ form.ps_pax.label_tag }}
+          {{ form.ps_pax }}
+        </div>
+        <div class="form-group">
+          {{ form.ps_20ft_container.label_tag }}
+          {{ form.ps_20ft_container }}
+        </div>
+        <div class="form-group">
+          {{ form.ps_40gp_container.label_tag }}
+          {{ form.ps_40gp_container }}
+        </div>
+        <div class="form-group">
+          {{ form.ps_40hq_container.label_tag }}
+          {{ form.ps_40hq_container }}
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <h2 class="mb-4">Product Images</h2>
+        <div class="form-group">
+          {{ form.featured_image.label_tag }}
+          {{ form.featured_image }}
+        </div>
+        <div class="form-group">
+          {{ ambience_formset.management_form }}
+          {% for form in ambience_formset %}
+          <div class="form-group">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="form-group">
+          {{ specification_formset.management_form }}
+          {% for form in specification_formset %}
+          <div class="form-group">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="form-group">
+          {{ technical_formset.management_form }}
+          {% for form in technical_formset %}
+          <div class="form-group">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="form-group mt-4">
+      <button type="submit" class="btn btn-primary">Create Product</button>
+    </div>
+  </form>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+/>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    console.log("jQuery is working!");
+  });
+</script>
+
+{% endblock %} {% endblock %}

@@ -1,0 +1,377 @@
+{% extends "adminlte/base.html" %}
+{% load static %}
+{% block body %}
+
+{% block content %}
+
+
+
+<div class="container">
+  <h1>Create Product</h1>
+  <form method="post" enctype="multipart/form-data" id="create-product-form">
+    {% csrf_token %}
+    <div class="card">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" id="product-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="general-info-tab" data-toggle="tab" href="#general-info" role="tab" aria-controls="general-info" aria-selected="true">General Information</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="product-specs-tab" data-toggle="tab" href="#product-specs" role="tab" aria-controls="product-specs" aria-selected="false">Product Specification</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content" id="product-tabs-content">
+          <div class="tab-pane fade show active" id="general-info" role="tabpanel" aria-labelledby="general-info-tab">
+            <div class="form-group">
+              <label for="{{ form.name.id_for_label }}">Name:</label>
+              {{ form.name }}
+              {% for error in form.name.errors %}
+                <p class="text-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.sku.id_for_label }}">SKU:</label>
+              {{ form.sku }}
+              {% for error in form.sku.errors %}
+                <p class="text-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <button type="button" class="btn btn-primary next-tab" data-tab="#product-specs-tab">Next</button>
+          </div>
+          <div class="tab-pane fade" id="product-specs" role="tabpanel" aria-labelledby="product-specs-tab">
+            <div class="form-group">
+              <label for="{{ form.cbm.id_for_label }}">CBM:</label>
+              {{ form.cbm }}
+              {% for error in form.cbm.errors %}
+                <p class="text-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.moq.id_for_label }}">Moq:</label>
+              {{ form.moq }}
+              {% for error in form.moq.errors %}
+                <p class="text-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <button type="button" class="btn btn-secondary prev-tab" data-tab="#general-info-tab">Previous</button>
+            <button type="submit" class="btn btn-primary">Create Product</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> {% endcomment %}
+
+<script>
+$(document).ready(function() {
+  $('.next-tab').click(function() {
+    var nextTab = $(this).data('tab');
+    $('.nav-tabs a[href="' + nextTab + '"]').tab('show');
+  });
+  
+  $('.prev-tab').click(function() {
+    var prevTab = $(this).data('tab');
+    $('.nav-tabs a[href="' + prevTab + '"]').tab('show');
+  });
+
+  // Submit form on the last tab
+  $('#create-product-form').submit(function(event) {
+    event.preventDefault();
+
+    // Get form data
+    var formData = new FormData($(this)[0]);
+
+    // Make an AJAX request to submit the form data
+    $.ajax({
+      url: $(this).attr('action'),
+      method: $(this).attr('method'),
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(data) {
+        // Handle success response
+        console.log('Product created successfully');
+      },
+      error: function(xhr, status, error) {
+        // Handle error response
+        console.log('Product creation failed');
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+ 
+<div class="container">
+  <h1>Create Product</h1>
+  <form method="post" enctype="multipart/form-data" id="create-product-form">
+    {% csrf_token %}
+    <div class="card">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" id="product-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="general-info-tab" data-toggle="tab" href="#general-info" role="tab" aria-controls="general-info" aria-selected="true">General Information</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="product-specs-tab" data-toggle="tab" href="#product-specs" role="tab" aria-controls="product-specs" aria-selected="false">Product Specification</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content" id="product-tabs-content">
+          <div class="tab-pane fade show active" id="general-info" role="tabpanel" aria-labelledby="general-info-tab">
+            <div class="form-group">
+              <label for="{{ form.name.id_for_label }}">Name:</label>
+              {{ form.name }}
+              {% for error in form.name.errors %}
+                <p class="text-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.sku.id_for_label }}">SKU:</label>
+              {{ form.sku }}
+              {% for error in form.sku.errors %}
+                <p class="text-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <button type="button" class="btn btn-primary next-tab" data-tab="#product-specs-tab">Next</button>
+          </div>
+          <div class="tab-pane fade" id="product-specs" role="tabpanel" aria-labelledby="product-specs-tab">
+            <div class="form-group">
+              <label for="{{ form.color.id_for_label }}">Color:</label>
+              {{ form.color }}
+              {% for error in form.color.errors %}
+                <p class="text-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.size.id_for_label }}">Size:</label>
+              {{ form.size }}
+              {% for error in form.size.errors %}
+                <p class="text-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <button type="button" class="btn btn-secondary prev-tab" data-tab="#general-info-tab">Previous</button>
+            <button type="submit" class="btn btn-primary">Create Product</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('.next-tab').click(function() {
+      var tab = $(this).data('tab');
+      $(tab).tab('show');
+    });
+
+    $('.prev-tab').click(function() {
+      var tab = $(this).data('tab');
+      $(tab).tab('show');
+    });
+  });
+</script>
+
+<div class="container">
+  <h1>Create Product</h1>
+  <div class="card">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs" id="product-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="general-info-tab" data-toggle="tab" href="#general-info" role="tab" aria-controls="general-info" aria-selected="true">General Information</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="product-specs-tab" data-toggle="tab" href="#product-specs" role="tab" aria-controls="product-specs" aria-selected="false">Product Specification</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="tab-content" id="product-tabs-content">
+          <div class="tab-pane fade show active" id="general-info" role="tabpanel" aria-labelledby="general-info-tab">
+            {% for field in form %}
+              <div class="form-group">
+                <label>{{ field.label_tag }}</label>
+                {{ field }}
+                {% for error in field.errors %}
+                  <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </div>
+          <div class="tab-pane fade" id="product-specs" role="tabpanel" aria-labelledby="product-specs-tab">
+            <!-- Add fields from the Product Specification tab -->
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Product</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+$(function() {
+  $('#product-tabs a').on('click', function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
+})
+</script>
+
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="card">
+      <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs" id="product-tabs" role="tablist">
+              <li class="nav-item">
+                  <a class="nav-link active" id="general-info-tab" data-toggle="tab" href="#general-info" role="tab" aria-controls="general-info" aria-selected="true">General Information</a>
+              </li>
+              <!-- <li class="nav-item">
+                  <a class="nav-link" id="product-specs-tab" data-toggle="tab" href="#product-specs" role="tab" aria-controls="product-specs" aria-selected="false">Product Specification</a>
+              </li> -->
+          </ul>
+      </div>
+      <div class="card-body">
+          <div class="tab-content" id="product-tabs-content">
+              <div class="tab-pane fade show active" id="general-info" role="tabpanel" aria-labelledby="general-info-tab">
+                  {% for field in form %}
+                  <div class="form-group">
+                      <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                      {{ field }}
+                      {% for error in field.errors %}
+                          <p class="text-danger">{{ error }}</p>
+                      {% endfor %}
+                  </div>
+                  {% endfor %}
+                  <!-- Add other fields from the General Information tab -->
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="form-group">
+      <button type="submit" class="btn btn-primary">Create Product</button>
+  </div>
+</form>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" id="product-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="general-info-tab" data-toggle="tab" href="#general-info" role="tab" aria-controls="general-info" aria-selected="true">General Information</a>
+          </li>
+          {% comment %} <li class="nav-item">
+            <a class="nav-link" id="product-specs-tab" data-toggle="tab" href="#product-specs" role="tab" aria-controls="product-specs" aria-selected="false">Product Specification</a>
+          </li> {% endcomment %}
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content" id="product-tabs-content">
+          <div class="tab-pane fade show active" id="general-info" role="tabpanel" aria-labelledby="general-info-tab">
+              {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+          </div>
+            
+            <!-- Add other fields from the General Information tab -->
+          
+          {% comment %} <button type="submit" class="btn btn-primary">Create Product</button> {% endcomment %}
+          {% comment %} <button type="submit" class="btn btn-primary">Save</button> {% endcomment %}
+          {% comment %} <div class="tab-pane fade" id="product-specs" role="tabpanel" aria-labelledby="product-specs-tab">
+            <div class="form-group">
+              {{ form.ps_overal_dimension.label_tag }}
+              {{ form.ps_overal_dimension }}
+            </div>
+            <div class="form-group">
+              {{ form.ps_arm_height.label_tag }}
+              {{ form.ps_arm_height }}
+            </div>
+            <div class="form-group">
+              {{ form.ps_seat_height.label_tag }}
+              {{ form.ps_seat_height }}
+            </div> {% endcomment %}
+            <!-- Add other fields from the Product Specification tab -->
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+
+
+
+
+
+
+  <div class="container">
+    <h1>Create Product</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          <label>{{ field.label_tag }}</label>
+          {{ field }}
+          {% for error in field.errors %}
+            <p class="text-danger">{{ error }}</p>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      {{ ambience_formset.management_form }}
+      {{ specification_formset.management_form }}
+      {{ technical_formset.management_form }}
+
+      <div class="form-group">
+        <label>Ambience Images</label>
+        {% for form in ambience_formset %}
+          {{ form.as_p }}
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label>Specification Images</label>
+        {% for form in specification_formset %}
+          {{ form.as_p }}
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label>Technical Images</label>
+        {% for form in technical_formset %}
+          {{ form.as_p }}
+        {% endfor %}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Create Product</button>
+    </form>
+  </div>
+{% endblock %}
+
+{% endblock %}
