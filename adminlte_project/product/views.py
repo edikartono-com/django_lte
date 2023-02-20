@@ -31,6 +31,7 @@ def product_list(request):
 
 @login_required
 def product_create(request):
+    print('product_create view called')
     form = ProductForm()
     # brands = Brand.objects.all()
     ambience_formset = AmbienceImageFormSet(prefix='ambience')
@@ -45,10 +46,12 @@ def product_create(request):
         }
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
+        print(f"form errors: {form.errors}")
         ambience_formset = AmbienceImageFormSet(request.POST, request.FILES, prefix='ambience')
         specification_formset = SpecificationImageFormSet(request.POST, request.FILES, prefix='specification')
         technical_formset = TechnicalImageFormSet(request.POST, request.FILES, prefix='technical')
         if form.is_valid() and ambience_formset.is_valid() and specification_formset.is_valid() and technical_formset.is_valid():
+            print("form is valid")
             try:
                 product = form.save(commit=False)
                 # category_list = request.POST.getlist('category')
@@ -81,6 +84,7 @@ def product_create(request):
                 return render(request, 'product/product_create.html', context)
         else:
             # form = ProductForm()
+            print(form.errors)
             messages.error(request, 'Failed to create product!')
             return render(request, 'product/product_create.html', context)
     if request.method == 'GET':
