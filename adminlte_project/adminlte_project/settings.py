@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'crispy_bootstrap4',
     'adminlte',
     'import_export',
     'product.apps.ProductConfig',
@@ -137,4 +138,42 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 
-CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# MESSAGE TAG
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-secondary',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger'
+}
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Styles', 'Format', 'RemoveFormat', 'Bold', 'Italic', 'Underline'],
+            ['Undo', 'Redo'],
+            ['NumberedList', 'BulletedList', 'Font', 'FontSize'],
+            ['Blockquote', 'TextColor', 'BGColor'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Table', 'SpecialChar']
+        ],
+        'extraPlugins': ','.join(['widget', 'lineutils']),
+        'removePlugins': 'exportpdf',
+        'width': '100%'
+    },
+    'minimalist': {
+        'toolbar': 'Minimal',
+        'toolbar_Minimal': [
+            ['Undo', 'Redo'],
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', 'Link', 'Unlink'],
+        ],
+        'removePlugins': 'exportpdf',
+        'width': '100%'
+    }
+}

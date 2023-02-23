@@ -5,7 +5,63 @@ from .models import Product, Unit, Channel, Category, \
 from django.core.exceptions import ValidationError
 from ckeditor.fields import RichTextField
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms import bootstrap as bs, layout, helper
+
+from .bootstrap import Tab, TabHolder
+
+class FormNewProduct(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name','sku']
+
+class FromUpdateProduct(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = helper.FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-md-2'
+        self.helper.field_class = 'col-md-10'
+        self.helper.add_input(layout.Submit('submit', 'Save'))
+        self.helper.form_tag = False
+        self.helper.layout = layout.Layout(
+            TabHolder(
+                Tab(
+                    'General Information',
+                    'prefix_code','sku',  'name', 'brand', 'status',
+                    'featured_image', 'material', 'unit', 'channel', 'category', 'cost_price',
+                    'category', 'brand', 'bom_file', 'cost_price', 'status',
+                ),
+                Tab(
+                    'Product Specification',
+                    'ps_overal_dimension','ps_arm_height','ps_seat_height','ps_seat_depth',
+                    'ps_nett_weight', 'ps_gross_weight', 'ps_product_type','ps_seat_construction',
+                ),
+                Tab(
+                    'Shipping details',
+                    'ps_box_dimension','ps_box_weight', 'ps_pax', 'ps_20ft_container',
+                    'ps_40gp_container','ps_40hq_container', 'cbm', 'moq',
+                ),
+                Tab(
+                    'Factory Drawing',
+                    'production_drawing_pdf', 'production_drawing_archive','assembly_pdf',
+                    'assembly_archive', 'bom_file',
+                ),
+                Tab(
+                    'Dezign Studio',
+                    'drawing_3d_dwg','drawing_3d_obj','drawing_3d_3dmax','drawing_3d_sketchup',
+                    inline = 'ambience_formset'
+                ),
+                Tab(
+                    'SEO',
+                    'seo_meta_title','seo_meta_description','seo_meta_keyword','seo_content_overview',
+                ),
+            )
+        )
 
 class ProductForm(forms.ModelForm):
         # ------------- crispy_forms
@@ -14,7 +70,7 @@ class ProductForm(forms.ModelForm):
     helper.form_class = 'form-horizontal'
     helper.label_class = 'col-md-2'
     helper.field_class = 'col-md-10'
-    helper.add_input(Submit('submit', 'Save'))
+    helper.add_input(layout.Submit('submit', 'Save'))
     # General Information ---------------------------
     name = forms.CharField(label='Name', max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Name','style': 'width: 30%;'}))
     pim_code = forms.CharField(label='PIM Code', required=False, widget=forms.TextInput(attrs={'class': 'form-control','readonly':'readonly', }))
@@ -154,6 +210,14 @@ class AmbienceImageForm(forms.ModelForm):
     class Meta:
         model = AmbienceImage
         fields = ['product', 'image']
+
+ambience_formset = forms.inlineformset_factory(
+    Product,
+    AmbienceImage,
+    AmbienceImageForm,
+    fields='__all__',
+    fk_name='product'
+)
 
 class SpecificationImageForm(forms.ModelForm):
     class Meta:
