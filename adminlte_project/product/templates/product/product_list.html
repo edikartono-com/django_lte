@@ -1,6 +1,9 @@
 {% extends "adminlte/base.html" %}
 {% load static %}
-{% comment %} {% block datatables %} {% endcomment %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'plugins/simple-datatables/style.css' %}">
+{% endblock %}
 {% block body %}
 
 {% comment %} {% if messages %}
@@ -93,142 +96,9 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
-                  <thead>
-                  <tr>
-                    <th>SKU</th>
-                    <th>Name</th>
-                    <th>Featured Image</th>
-                    <th>Category</th>
-                    <th>Brand</th>
-                    <th>BOM File</th>
-                    <th>Cost Price</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                  </thead>
-                  {% for product in products %}
-                  <tbody>
-                  <tr>
-                    <td>{{ product.sku }}</td>
-                    <td>{{ product.name }}</td>
-                    <td>{% if product.featured_image %}<img src="{{ product.featured_image.url }}" width="100"  alt="{{ product.name }}">{% endif %}</td>
-                    <td>{{ product.category.all|join:', ' }}</td>
-                    <td>{{ product.brand }}</td>
-                    <td>{% if product.bom_file %}<a href="{{ product.bom_file.url }}">Download</a>{% endif %}</td>
-                    <td>{{ product.cost_price }}</td>
-                    <td>{{ product.created_at }}</td>
-                    <td>{{ product.updated_at }}</td>
-                    <td>{{ product.get_status_display }}</td>
-                    <td>
-                      <a href="{% url 'product:product_edit' product.id %}" class="btn btn-info btn-sm">Edit</a>
-                      <a href="{% url 'product:product_delete' product.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
-                      {% comment %} <a href="{% url 'product:product_details' product.id %}" class="btn btn-secondary btn-sm">Details</a> {% endcomment %}
-                    </td>
-                  </tr>
-                  </tbody>
-                  {% endfor %}
-                  
-                  </tbody>
-
-                </table>
+                <table id="tableProduct" class="table table-bordered table-hover"></table>
               </div>
-              {% comment %} <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
-                  <thead>
-                  <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 5.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5</td>
-                    <td>C</td>
-                  </tr>
-                  
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                  </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div> {% endcomment %}
             <!-- /.card -->
-
-            {% comment %} <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 5.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5</td>
-                    <td>C</td>
-                  </tr>
-
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                  </tr>
-                  </tfoot> {% endcomment %}
-                </table>
               </div>
               <!-- /.card-body -->
             </div>
@@ -247,49 +117,66 @@
 
 <!-- ./wrapper -->
 <!-- Datatable script -->
-{% comment %} <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+
+
+
+
+
+
+{% endblock %}
+
+{% block extrajs %}
+<script src="{% static 'plugins/simple-datatables/simple-datatables.js' %}"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", ()=>{
+    const myData = JSON.parse('{{ results|safe }}');
+
+    const to_date_str = (to_dt) => {
+        const date_format = new Date(to_dt);
+        const date_option = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }
+        const new_date = date_format.toLocaleDateString('id', date_option) +
+        " " + date_format.toLocaleTimeString('id');
+        return new_date
+    };
+
+    const thead = [
+        "SKU", "Name", "Featured Image", "Category", "Brand", "BOM File",
+        "Cost Price", "Created At", "Updated At", "Status", "Actions"
+    ]
+    const tbody = []
+    myData.map((items) => {
+        console.log(items.fields)
+        let item = items.fields
+        let row = []
+        row.push(
+            item.sku,
+            item.name,
+            item.featured_image,
+            item.category,
+            item.brand,
+            item.bom_file,
+            item.cost_price,
+            to_date_str(item.created_at),
+            to_date_str(item.updated_at),
+            item.status,
+            ''
+        )
+        tbody.push(row)
+    })
+
+    const myTable = new window.simpleDatatables.DataTable("#tableProduct", {
+        perPage: 10,
+        perPageSelect: [10, 25, 50, 100],
+        data: {
+            headings: thead,
+            data: tbody
+        }
     });
-  });
-</script> {% endcomment %}
-{% comment %} {% endblock %} {% endcomment %}
-
-{% comment %} <script>
-  $(document).ready(function(){
-    {% if messages %}
-      {% for message in messages %}
-        {% if message.tags == 'success' %}
-          toastr.success("{{ message }}");
-        {% elif message.tags == 'info' %}
-          toastr.info("{{ message }}");
-        {% elif message.tags == 'warning' %}
-          toastr.warning("{{ message }}");
-        {% else %}
-          toastr.error("{{ message }}");
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-  });
-</script> {% endcomment %}
-
-
-
-
-
-
-
-
-
+  }, false)
+</script>
 {% endblock %}

@@ -36,6 +36,27 @@ def product_list(request):
     products = Product.objects.all()
     return render(request, 'product/product_list.html', {'products': products})
 
+class ProductList(LoginRequiredMixin, TemplateView):
+    template_name = 'product/product_list.html'
+
+    def get_context_data(self, *args, **kwargs):
+        from django.core import serializers
+        context = super().get_context_data(*args, **kwargs)
+        product = Product.objects.all()
+        # data = {"results":serializers.serialize('json', product)}
+        context['results'] = serializers.serialize('json', product)
+        return context
+
+    # def get_context_data(self, *args, **kwargs):
+    #     from django.core import serializers
+    #     products = Product.objects.all()
+    #     context = super().get_context_data(*args, **kwargs)
+    #     data = serializers.serialize('json', products)
+    #     print("PRODUCTS", data)
+    #     context['products'] = products
+    #     context['datas'] = data
+    #     return context
+
 class AddNewProduct(LoginRequiredMixin, CreateView):
     template_name = 'product/product_create.html'
     form_class = frm.FormNewProduct
