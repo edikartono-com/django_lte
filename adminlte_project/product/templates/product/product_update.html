@@ -1,5 +1,5 @@
 {% extends "adminlte/base.html" %}
-{% load static crispy_forms_tags %}
+{% load static tabular %}
 
 {% block body %}
 <div class="card">
@@ -36,8 +36,8 @@
                 <div class="row">
                     <div id="content-main" class="col-12">
                         <form method="post">
-                            {{ form.media }}
-                            {% crispy form %}
+                            {% tabbular_form form %}
+                            <input type="submit" value="Simpan">
                         </form>
                     </div>
                 </div>

@@ -655,26 +655,6 @@
     });
   });
 </script>
-<script>
-  $(document).ready(function() {
-    {% if messages %}
-      {% for message in messages %}
-        var messageType = "{{ message.tags }}";
-        var messageText = "{{ message }}";
-
-        if (messageType === "success") {
-          toastr.success(messageText);
-        } else if (messageType === "info") {
-          toastr.info(messageText);
-        } else if (messageType === "warning") {
-          toastr.warning(messageText);
-        } else if (messageType === "error") {
-          toastr.error(messageText);
-        }
-      {% endfor %}
-    {% endif %}
-  });
-</script>
 <!-- =============  /MODAL, ALERT, TOAST =============-->
 
 <!-- =============  FORM  =============-->
@@ -697,9 +677,9 @@
 <!-- BS-Stepper -->
 <script src="{% static 'plugins/bs-stepper/js/bs-stepper.min.js' %}"></script>
 {% comment %} <!-- dropzonejs -->
-<script src="{% static 'plugins/dropzone/min/dropzone.min.js' %}"></script> {% endcomment %}
+<script src="{% static 'plugins/dropzone/min/dropzone.min.js' %}"></script>
 <!-- form-advanced.html js file -->
-{% comment %} <script>
+<script>
   $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
@@ -774,13 +754,13 @@
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
 
-  }) {% endcomment %}
-  {% comment %} // BS-Stepper Init
+  })
+  // BS-Stepper Init
   document.addEventListener('DOMContentLoaded', function () {
     window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-  }) {% endcomment %}
+  })
 
-  {% comment %} // DropzoneJS Demo Code Start
+  // DropzoneJS Demo Code Start
   Dropzone.autoDiscover = false
 
   // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
@@ -831,8 +811,8 @@
   document.querySelector("#actions .cancel").onclick = function() {
     myDropzone.removeAllFiles(true)
   }
-  // DropzoneJS Demo Code End {% endcomment %}
-{% comment %} </script> {% endcomment %}
+  // DropzoneJS Demo Code End 
+</script> {% endcomment %}
 <!-- =============  /FORM  =============-->
 
 
@@ -841,7 +821,31 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{% static 'dist/js/demo.js' %}"></script>
 
-
+{% if messages %}
+{% for message in messages %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const elemnt = document.createElement('div');
+        elemnt.setAttribute('class', 'alert {{ message.tags }} alert-dismissible')
+        elemnt.innerHTML = '{{ message|safe|capfirst }}';
+        Swal.fire({
+            icon: '{{ message.tags|cut:"alert-" }}',
+            toast: true,
+            title: '{{ message.tags|cut:"alert-" }}',
+            html: elemnt,
+            timer: 5000,
+            timerProgressBar: true,
+            buttonsStyling: false,
+            allowOutsideClick: false,
+            customClass: {
+                confirmButton: 'btn btn-{{ message.tags|cut:"alert-" }}',
+                popup: 'alert alert-success'
+            }
+        })
+    }, false);
+</script>
+{% endfor %}
+{% endif %}
 
 {% block extrajs %}{% endblock %}
 </body>

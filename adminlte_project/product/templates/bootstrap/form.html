@@ -1,0 +1,12 @@
+{{ form.media }}
+{% csrf_token %}
+<ul class="nav nav-tabs">
+    {{ links }}
+</ul>
+<div class="tab-content card-body">
+    {% for tab in tabs %}
+    <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ tab.id_link }}" role="tabpanel">
+        {{ tab.content }}
+    </div>
+    {% endfor %}
+</div>

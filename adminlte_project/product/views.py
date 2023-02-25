@@ -1,16 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Brand, Category, Channel, Unit, Material,\
                     AmbienceImage,SpecificationImage, TechnicalImage
-import datetime
 from django.contrib import messages
-from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponseRedirect, JsonResponse
+from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect
-from django.core.exceptions import ValidationError
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from .forms import ProductForm, FormNewProduct, FromUpdateProduct, CategoryForm, BrandForm, AmbienceImageForm,\
 #                     SpecificationImageForm, TechnicalImageForm, ChannelForm,\
 #                     UnitForm, MaterialForm
@@ -43,23 +39,13 @@ class ProductList(LoginRequiredMixin, TemplateView):
         from django.core import serializers
         context = super().get_context_data(*args, **kwargs)
         product = Product.objects.all()
-        # data = {"results":serializers.serialize('json', product)}
         context['results'] = serializers.serialize('json', product)
         return context
 
-    # def get_context_data(self, *args, **kwargs):
-    #     from django.core import serializers
-    #     products = Product.objects.all()
-    #     context = super().get_context_data(*args, **kwargs)
-    #     data = serializers.serialize('json', products)
-    #     print("PRODUCTS", data)
-    #     context['products'] = products
-    #     context['datas'] = data
-    #     return context
-
-class AddNewProduct(LoginRequiredMixin, CreateView):
+class AddNewProduct(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     template_name = 'product/product_create.html'
     form_class = frm.FormNewProduct
+    success_message = "%(name)s Product was created successfully!"
     
     def form_valid(self, form):
         f = form.save()
@@ -77,9 +63,6 @@ class UpdateProduct(LoginRequiredMixin, FormView):
         form = frm.FromUpdateProduct(
             instance=parent
         )
-        ambience_formset = frm.ambience_formset(
-            instance=parent,
-        )
 
         if self.request.POST:
             form = frm.FromUpdateProduct(
@@ -88,10 +71,9 @@ class UpdateProduct(LoginRequiredMixin, FormView):
             )
         
         context = self.get_context_data(
-            form = form,
-            ambience_formset = ambience_formset
+            form = form
         )
-        print("FORM ERROR", form.errors, ambience_formset.errors)
+        
         return self.render_to_response(context)
 
     def get(self, *args, **kwargs):

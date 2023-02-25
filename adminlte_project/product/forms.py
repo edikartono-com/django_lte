@@ -7,7 +7,46 @@ from ckeditor.fields import RichTextField
 from crispy_forms.helper import FormHelper
 from crispy_forms import bootstrap as bs, layout, helper
 
-from .bootstrap import Tab, TabHolder
+from .bootstrap import NavTabs, TabForm
+
+class AmbienceImageForm(forms.ModelForm):
+    class Meta:
+        model = AmbienceImage
+        fields = ['image']
+
+ambience_formset = forms.inlineformset_factory(
+    Product,
+    AmbienceImage,
+    AmbienceImageForm,
+    fields='__all__',
+    fk_name='product'
+)
+
+class SpecificationImageForm(forms.ModelForm):
+    class Meta:
+        model = SpecificationImage
+        fields = ['image']
+
+specification_formset = forms.inlineformset_factory(
+    Product,
+    SpecificationImage,
+    SpecificationImageForm,
+    fk_name='product',
+    fields='__all__'
+)
+
+class TechnicalImageForm(forms.ModelForm):
+    class Meta:
+        model = TechnicalImage
+        fields = ['image']
+
+technical_formset = forms.modelformset_factory(
+    TechnicalImage,
+    TechnicalImageForm,
+    extra=1,
+    can_delete=True,
+    fields=['image']
+)
 
 class FormNewProduct(forms.ModelForm):
     class Meta:
@@ -21,46 +60,45 @@ class FromUpdateProduct(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper = helper.FormHelper()
-        self.helper.form_method = 'post'
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-2'
-        self.helper.field_class = 'col-md-10'
-        self.helper.add_input(layout.Submit('submit', 'Save'))
-        self.helper.form_tag = False
-        self.helper.layout = layout.Layout(
-            TabHolder(
-                Tab(
-                    'General Information',
-                    'prefix_code','sku',  'name', 'brand', 'status',
-                    'featured_image', 'material', 'unit', 'channel', 'category', 'cost_price',
-                    'category', 'brand', 'bom_file', 'cost_price', 'status',
-                ),
-                Tab(
-                    'Product Specification',
-                    'ps_overal_dimension','ps_arm_height','ps_seat_height','ps_seat_depth',
-                    'ps_nett_weight', 'ps_gross_weight', 'ps_product_type','ps_seat_construction',
-                ),
-                Tab(
-                    'Shipping details',
-                    'ps_box_dimension','ps_box_weight', 'ps_pax', 'ps_20ft_container',
-                    'ps_40gp_container','ps_40hq_container', 'cbm', 'moq',
-                ),
-                Tab(
-                    'Factory Drawing',
-                    'production_drawing_pdf', 'production_drawing_archive','assembly_pdf',
-                    'assembly_archive', 'bom_file',
-                ),
-                Tab(
-                    'Dezign Studio',
-                    'drawing_3d_dwg','drawing_3d_obj','drawing_3d_3dmax','drawing_3d_sketchup',
-                    inline = 'ambience_formset'
-                ),
-                Tab(
-                    'SEO',
-                    'seo_meta_title','seo_meta_description','seo_meta_keyword','seo_content_overview',
-                ),
-            )
+        self.helper = NavTabs(
+        # self.helper.form_method = 'post'
+        # self.helper.form_class = 'form-horizontal'
+        # self.helper.label_class = 'col-md-2'
+        # self.helper.field_class = 'col-md-10'
+        # self.helper.add_input(layout.Submit('submit', 'Save'))
+        # self.helper.form_tag = False
+        # self.helper.layout = layout.Layout(
+            self,
+            TabForm(
+                'General Information',
+                'prefix_code','sku',  'name', 'brand', 'status',
+                'featured_image', 'material', 'unit', 'channel', 'category', 'cost_price',
+                'category', 'brand', 'bom_file', 'cost_price', 'status',
+            ),
+            TabForm(
+                'Product Specification',
+                'ps_overal_dimension','ps_arm_height','ps_seat_height','ps_seat_depth',
+                'ps_nett_weight', 'ps_gross_weight', 'ps_product_type','ps_seat_construction',
+            ),
+            TabForm(
+                'Shipping details',
+                'ps_box_dimension','ps_box_weight', 'ps_pax', 'ps_20ft_container',
+                'ps_40gp_container','ps_40hq_container', 'cbm', 'moq',
+            ),
+            TabForm(
+                'Factory Drawing',
+                'production_drawing_pdf', 'production_drawing_archive','assembly_pdf',
+                'assembly_archive', 'bom_file',
+            ),
+            TabForm(
+                'Dezign Studio',
+                'drawing_3d_dwg','drawing_3d_obj','drawing_3d_3dmax','drawing_3d_sketchup',
+                inline = TechnicalImageForm
+            ),
+            TabForm(
+                'SEO',
+                'seo_meta_title','seo_meta_description','seo_meta_keyword','seo_content_overview',
+            ),
         )
 
 class ProductForm(forms.ModelForm):
@@ -205,27 +243,3 @@ class UnitForm(forms.ModelForm):
     class Meta:
         model = Unit
         fields = ['name']
-
-class AmbienceImageForm(forms.ModelForm):
-    class Meta:
-        model = AmbienceImage
-        fields = ['product', 'image']
-
-ambience_formset = forms.inlineformset_factory(
-    Product,
-    AmbienceImage,
-    AmbienceImageForm,
-    fields='__all__',
-    fk_name='product'
-)
-
-class SpecificationImageForm(forms.ModelForm):
-    class Meta:
-        model = SpecificationImage
-        fields = ['product', 'image']
-
-class TechnicalImageForm(forms.ModelForm):
-    class Meta:
-        model = TechnicalImage
-        fields = ['product', 'image']
-
