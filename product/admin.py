@@ -110,12 +110,6 @@ class ProductAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         return format_html(
             f'''<img src="{obj.featured_image.url}" style="max-width:500px; max-height:500px"/>'''
         )
-    
-    # @admin.display(description="Specification Image")
-    # def specification_image_inline(self, request, *args, **kwargs):
-    #     context = getattr(request, "context_data", None) or {}
-    #     # inline = context['inline_admin_formset'] # = context['inline_admin_formsets'].pop(0)
-    #     return get_template(inline.opts.template).render(context, request)
 
     def get_form(self, request, obj=None, **kwargs):
         if request.user.is_superuser:
