@@ -1,0 +1,8 @@
+{% load custom_admin_list %}
+{% for navp in adminform %}
+<li class="nav-item">
+    <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="pill" href="#{% str_slug navp.name %}">
+        {{ navp.name }}
+    </a>
+</li>
+{% endfor %}

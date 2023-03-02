@@ -1,0 +1,16 @@
+{% load widget_tweaks %}
+
+{% csrf_token %}
+{{ form.media }}
+{% for hidden in form.hidden_fields %}
+{{ hidden }}
+{% endfor %}
+
+{% for field in form.visible_fields %}
+<div class="form-row align-items-center">
+    <div class="col-auto">
+        <label class="sr-only" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% render_field field class="form-control" placeholder=field.label %}
+    </div>
+</div>
+{% endfor %}
