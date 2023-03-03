@@ -53,7 +53,7 @@ class AddNewProduct(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         f = form.save()
         return HttpResponseRedirect(
-            reverse('product:product_edit', args=[f.id])
+            reverse('admin:product_product_change', args=[f.id])
         )
 
 class UpdateProduct(AdminSiteMixin, FormView):
